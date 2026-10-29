@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>소식 올리기 | 대구중구지역사회보장협의체</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+[hidden]{display:none!important}
+:root{
+  --main:#3346A8; --main-d:#22307A; --main-l:#EEF0FA;
+  --sky:#29A8E0; --accent:#F2A33A; --ink:#1C2033; --muted:#5B6075; --line:#DFE2EE;
+  --bg:#ffffff; --soft:#F5F6FB; --ok:#1E7A4C; --ok-l:#E3F4EA; --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;word-break:keep-all;font-size:16px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.draft{background:var(--accent);color:#3a2500;text-align:center;font-size:13px;padding:6px 16px;font-weight:500}
+
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:20}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:17px;color:var(--main-d)}
+.logo .mark{width:42px;height:42px;object-fit:contain;flex-shrink:0}
+.logo small{display:block;font-size:10.5px;font-weight:500;color:var(--muted);letter-spacing:.03em}
+.menu{display:flex;gap:20px;font-weight:500;font-size:15px}
+.menu a:hover,.menu a.on{color:var(--main)}
+.menu a.on{font-weight:700}
+.burger{display:none;background:none;border:0;font-size:26px;cursor:pointer;color:var(--main-d)}
+@media(max-width:1020px){
+  .menu{display:none;position:absolute;top:70px;left:0;right:0;background:#fff;flex-direction:column;gap:0;border-bottom:1px solid var(--line)}
+  .menu.open{display:flex}
+  .menu a{padding:14px 16px;border-top:1px solid var(--line)}
+  .burger{display:block}
+}
+
+.sub-hero{background:linear-gradient(120deg,var(--main-d),var(--main));color:#fff;padding:40px 0 44px}
+.crumb{font-size:13px;opacity:.8;margin-bottom:8px}
+.crumb a:hover{text-decoration:underline}
+.sub-hero h1{font-size:clamp(26px,4vw,34px);font-weight:900}
+.sub-hero p{opacity:.88;margin-top:6px;font-size:15px}
+
+
+
+main.wrap{padding-block:32px 72px}
+.box{max-width:640px;margin:0 auto;border:1px solid var(--line);border-radius:18px;padding:26px 24px}
+.box h2{font-size:20px;color:var(--main-d);margin-bottom:6px}
+.box > p{color:var(--muted);font-size:14.5px;margin-bottom:18px}
+.f{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.f label,.f .lb{font-weight:700;font-size:14.5px}
+.f small{color:var(--muted);font-size:13px}
+input[type=text],input[type=password],input[type=date],select,textarea{font:inherit;font-size:15.5px;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;width:100%;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--main)}
+textarea{min-height:130px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.row{grid-template-columns:1fr}}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:6px;border:0;border-radius:12px;padding:13px 20px;font:inherit;font-weight:700;font-size:16px;cursor:pointer;width:100%}
+.btn.pri{background:var(--main);color:#fff}
+.btn.pri:disabled{opacity:.6;cursor:wait}
+.btn.sub{background:var(--soft);color:var(--main-d);margin-top:10px}
+.pick{border:2px dashed var(--line);border-radius:12px;padding:18px;text-align:center;cursor:pointer;color:var(--muted);font-size:14.5px}
+.pick:hover{border-color:var(--main);color:var(--main)}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.thumbs div{position:relative;aspect-ratio:1;border-radius:10px;background:var(--soft) center/cover;max-width:100%}
+.thumbs button{position:absolute;top:4px;right:4px;border:0;border-radius:50%;width:26px;height:26px;background:rgba(0,0,0,.6);color:#fff;cursor:pointer}
+.who{display:flex;justify-content:space-between;align-items:center;background:var(--main-l);color:var(--main-d);border-radius:10px;padding:10px 14px;font-size:14.5px;margin-bottom:18px}
+.who button{border:0;background:none;color:var(--main);font:inherit;font-weight:700;cursor:pointer}
+.msg{border-radius:10px;padding:12px 14px;font-size:14.5px;margin-bottom:14px}
+.msg.err{background:#FDECEC;color:#9B2C2C}
+.msg.ok{background:var(--ok-l);color:var(--ok)}
+.notice{font-size:13px;color:var(--muted);background:var(--soft);border-radius:10px;padding:10px 12px;margin-bottom:16px}
+
+footer{background:#151A33;color:#B6BBD1;padding:36px 0;font-size:14px}
+footer b{color:#fff}
+.ph{background:rgba(242,163,58,.25);border-radius:3px;padding:0 4px;color:#fff}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="./" class="logo"><img class="mark" src="logo.png" alt="" width="42" height="42"><span>대구중구지역사회보장협의체<small>DAEGU JUNG-GU SOCIAL SECURITY COUNCIL</small></span></a>
+    <nav class="menu" id="menu">
+      <a href="index.html#about">협의체 소개</a>
+      <a href="bunkwa.html">실무분과</a>
+      <a href="dong.html">동 협의체</a>
+      <a href="jawon.html">복지자원</a>
+      <a href="index.html#biz">주요사업</a>
+      <a href="news.html" class="on">소식·공지</a>
+      <a href="gyehoek.html">자료실</a>
+      <a href="index.html#contact">참여·문의</a>
+    </nav>
+    <button class="burger" aria-label="메뉴 열기" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<div class="sub-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="./">홈</a> › <a href="news.html">활동 소식</a> › 소식 올리기</div>
+    <h1>소식 올리기</h1>
+    <p>사무국과 동 복지팀 담당자가 협의체 활동 소식을 올리는 곳입니다</p>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- 1. 접속코드 -->
+  <section class="box" id="gate">
+    <h2>접속코드 입력</h2>
+    <p>사무국과 동 복지팀에 안내한 접속코드를 입력해 주세요.</p>
+    <div class="msg err" id="gate-err" hidden></div>
+    <form id="gate-form">
+      <div class="f"><label for="code">접속코드</label><input type="password" id="code" autocomplete="off" required></div>
+      <button class="btn pri" type="submit" id="gate-btn">확인</button>
+    </form>
+  </section>
+
+  <!-- 2. 작성 -->
+  <section class="box" id="editor" hidden>
+    <div class="who"><span id="who"></span><button type="button" id="logout">나가기</button></div>
+    <div class="msg err" id="err" hidden></div>
+    <div class="msg ok" id="ok" hidden></div>
+    <form id="form">
+      <div class="row" id="cat-row">
+        <div class="f"><label for="category">구분</label><select id="category"><option>구 협의체</option><option>동 협의체</option></select></div>
+        <div class="f" id="dong-f" hidden><label for="dongsel">동</label><select id="dongsel"></select></div>
+      </div>
+      <div class="f"><label for="date">활동일</label><input type="date" id="date" required></div>
+      <div class="f"><label for="title">제목</label><input type="text" id="title" maxlength="60" required placeholder="예) 동 협의체 위원과 함께한 이웃 안부 살피기"></div>
+      <div class="f"><label for="body">내용</label><textarea id="body" maxlength="1000" required placeholder="언제, 어디서, 누가, 무엇을 했는지 3~5줄로 적어 주세요."></textarea><small><span id="cnt">0</span> / 1000자</small></div>
+      <div class="f">
+        <span class="lb">사진 (1~3장, 필수)</span>
+        <label class="pick" for="photo">📷 눌러서 사진 고르기<br><small>휴대폰에서는 바로 촬영할 수도 있어요</small></label>
+        <input type="file" id="photo" accept="image/*" multiple hidden>
+        <div class="thumbs" id="thumbs"></div>
+      </div>
+      <p class="notice">얼굴이 알아보이는 대상자 사진은 게재 동의를 받은 경우에만 올려 주세요. 개인정보(이름표, 주소, 연락처)가 보이지 않게 해 주세요.</p>
+      <button class="btn pri" type="submit" id="send">소식 등록하기</button>
+    </form>
+    <a class="btn sub" href="news.html">등록된 소식 보기</a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap"><b>대구중구지역사회보장협의체 사무국</b> · 대구광역시 중구 국채보상로139길 1, 4층 · 전화 053-661-2288 · actor0204@korea.kr · © 2026</div>
+</footer>
+
+<script src="news.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+let AUTH = null, SHOTS = [];
+$("dongsel").innerHTML = NEWS_DONGS.map(d => `<option>${d}</option>`).join("");
+$("date").value = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+
+function show(el, text){ el.textContent = text; el.hidden = !text; }
+
+$("gate-form").addEventListener("submit", async e => {
+  e.preventDefault();
+  show($("gate-err"), "");
+  if (!NEWS_API_URL) { show($("gate-err"), "아직 소식 등록 기능이 연결되지 않았어요. 사무국에 문의해 주세요."); return; }
+  $("gate-btn").disabled = true; $("gate-btn").textContent = "확인 중…";
+  try {
+    const r = await fetch(NEWS_API_URL + "?action=login&code=" + encodeURIComponent($("code").value.trim()));
+    const j = await r.json();
+    if (j.status !== "ok") throw new Error(j.message || "접속코드가 맞지 않습니다.");
+    AUTH = { code: $("code").value.trim(), role: j.role, name: j.name, dong: j.dong };
+    $("who").textContent = `${j.name} 으로 접속했어요` + (j.role === "동" ? " · 사무국 확인 후 게시" : " · 바로 게시");
+    $("cat-row").hidden = j.role === "동";
+    $("gate").hidden = true; $("editor").hidden = false;
+  } catch (err) { show($("gate-err"), err.message || "확인하지 못했어요. 인터넷 연결을 확인해 주세요."); }
+  $("gate-btn").disabled = false; $("gate-btn").textContent = "확인";
+});
+
+$("logout").addEventListener("click", () => { AUTH = null; $("code").value = ""; $("editor").hidden = true; $("gate").hidden = false; });
+$("category").addEventListener("change", () => { $("dong-f").hidden = $("category").value !== "동 협의체"; });
+$("body").addEventListener("input", () => { $("cnt").textContent = $("body").value.length; });
+
+/* 사진: 긴 변 1600px로 줄여 JPEG로 변환 */
+function shrink(file){
+  return new Promise((resolve, reject) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const k = Math.min(1, 1600 / Math.max(img.width, img.height));
+      const c = document.createElement("canvas");
+      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      resolve(c.toDataURL("image/jpeg", 0.82));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("사진을 읽지 못했어요.")); };
+    img.src = url;
+  });
+}
+function drawThumbs(){
+  $("thumbs").innerHTML = SHOTS.map((s, i) => `<div style="background-image:url('${s}')"><button type="button" data-i="${i}" aria-label="사진 ${i + 1} 빼기">✕</button></div>`).join("");
+}
+$("photo").addEventListener("change", async e => {
+  show($("err"), "");
+  for (const f of [...e.target.files]) {
+    if (SHOTS.length >= 3) { show($("err"), "사진은 3장까지 올릴 수 있어요."); break; }
+    try { SHOTS.push(await shrink(f)); } catch (err) { show($("err"), err.message); }
+  }
+  e.target.value = ""; drawThumbs();
+});
+$("thumbs").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { SHOTS.splice(+b.dataset.i, 1); drawThumbs(); } });
+
+$("form").addEventListener("submit", async e => {
+  e.preventDefault();
+  show($("err"), ""); show($("ok"), "");
+  if (!SHOTS.length) { show($("err"), "사진을 1장 이상 올려 주세요."); return; }
+  const payload = {
+    action: "post", code: AUTH.code,
+    category: AUTH.role === "동" ? "동 협의체" : $("category").value,
+    dong: AUTH.role === "동" ? AUTH.dong : $("dongsel").value,
+    date: $("date").value, title: $("title").value.trim(), body: $("body").value.trim(),
+    photos: SHOTS.map(s => ({ mime: "image/jpeg", data: s.split(",")[1] }))
+  };
+  $("send").disabled = true; $("send").textContent = "등록하는 중… (사진 크기에 따라 10초 정도 걸려요)";
+  try {
+    const r = await fetch(NEWS_API_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
+    const j = await r.json();
+    if (j.status !== "ok") throw new Error(j.message || "등록하지 못했어요.");
+    show($("ok"), j.message);
+    $("title").value = ""; $("body").value = ""; $("cnt").textContent = "0"; SHOTS = []; drawThumbs();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } catch (err) { show($("err"), err.message || "등록하지 못했어요. 잠시 후 다시 시도해 주세요."); }
+  $("send").disabled = false; $("send").textContent = "소식 등록하기";
+});
+</script>
+</body>
+</html>

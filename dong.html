@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
+[hidden]{display:none!important}
 :root{
   --main:#3346A8; --main-d:#22307A; --main-l:#EEF0FA;
   --sky:#29A8E0; --accent:#F2A33A; --ink:#1C2033; --muted:#5B6075; --line:#DFE2EE;
@@ -139,6 +140,15 @@ h3.st::before{content:"";width:4px;height:18px;background:var(--accent);border-r
 .photos div{aspect-ratio:4/3;border-radius:12px;background:repeating-linear-gradient(45deg,var(--soft) 0 10px,#EBEDF6 10px 20px);display:grid;place-items:center;color:var(--muted);font-size:13px;text-align:center;padding:8px}
 @media(max-width:600px){.photos{grid-template-columns:repeat(2,1fr)}}
 
+.dnews{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:600px){.dnews{grid-template-columns:1fr}}
+.dn{border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.dn:hover{border-color:var(--main)}
+.dn-ph{aspect-ratio:4/3;background:var(--soft) center/cover;max-width:100%}
+.dn-tx{padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.dn-tx time{font-size:12.5px;color:var(--muted)}
+.dn-tx b{font-size:14.5px;color:var(--main-d);line-height:1.4}
+.dn-empty{grid-column:1/-1;border:2px dashed var(--line);border-radius:12px;padding:22px;text-align:center;color:var(--muted);font-size:14.5px}
 .pager{display:flex;justify-content:space-between;gap:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
 .pager a{display:flex;flex-direction:column;font-size:13px;color:var(--muted)}
 .pager a b{font-size:16px;color:var(--main-d)}
@@ -159,7 +169,7 @@ footer b{color:#fff}
       <a href="dong.html" class="on">동 협의체</a>
       <a href="jawon.html">복지자원</a>
       <a href="index.html#biz">주요사업</a>
-      <a href="index.html#news">소식·공지</a>
+      <a href="news.html">소식·공지</a>
       <a href="gyehoek.html">자료실</a>
       <a href="index.html#contact">참여·문의</a>
     </nav>
@@ -184,6 +194,7 @@ footer b{color:#fff}
   <div class="wrap"><b>대구중구지역사회보장협의체 사무국</b> · 대구광역시 중구 국채보상로139길 1, 4층 · 전화 053-661-2288 · actor0204@korea.kr · © 2026</div>
 </footer>
 
+<script src="news.js"></script>
 <script>
 // ▼ 동 데이터: 각 동 정보는 여기만 고치면 됩니다.
 // 연락처 출처: 중구 12개동 복지팀 연락처 / 사업 출처: 2026년 협의체 안내자료
@@ -287,6 +298,10 @@ function detail(d, i){
   </div>
   ${best}
   <section class="block">
+    <h3 class="st">우리 동 소식</h3>
+    <div class="dnews" id="dnews"><p class="dn-empty">소식을 불러오고 있어요…</p></div>
+  </section>
+  <section class="block">
     <h3 class="st">주요 활동</h3>
     <ul class="acts">
       <li><b>복지사각지대 발굴</b><span>위원이 이웃을 살피고 도움이 필요한 가구를 복지팀에 연결</span></li>
@@ -310,6 +325,13 @@ function render(id){
     `<li><a href="#" class="${d ? "" : "on"}">개요</a></li>` +
     DONGS.map(x => `<li><a href="#${x.id}" class="${d && x.id === d.id ? "on" : ""}">${esc(x.name)}</a></li>`).join("");
   document.getElementById("content").innerHTML = d ? detail(d, i) : overview();
+  if (d && typeof loadNews === "function") {
+    loadNews({ dong: d.name, limit: 6 }).then(items => {
+      const el = document.getElementById("dnews"); if (!el) return;
+      el.innerHTML = items.length ? items.map(n => `<a class="dn" href="news.html"><span class="dn-ph" style="background-image:url('${newsEsc(newsPhotoUrl(n.photos[0], 600))}')"></span><span class="dn-tx"><time>${newsDate(n.date)}</time><b>${newsEsc(n.title)}</b></span></a>`).join("")
+        : `<p class="dn-empty">${esc(d.name)} 협의체 소식이 올라오면 이곳에 사진과 함께 보여요.</p>`;
+    });
+  }
   const on = document.querySelector(".side a.on");
   if (on) on.scrollIntoView({block: "nearest", inline: "center"});
 }

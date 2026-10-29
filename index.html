@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
+[hidden]{display:none!important}
 :root{
   --main:#3346A8; --main-d:#22307A; --main-l:#EEF0FA;
   --sky:#29A8E0; --accent:#F2A33A; --ink:#1C2033; --muted:#5B6075; --line:#DFE2EE;
@@ -141,7 +142,8 @@ section{padding:68px 0}
 .list li{list-style:none;display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
 .list li:last-child{border-bottom:0}
 .board>*{min-width:0}
-.list li span.t{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.list li a.t:hover{color:var(--main)}
+.list li .t{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .list li time{color:var(--muted);font-size:13px;flex-shrink:0}
 .tag{display:inline-block;font-size:11px;font-weight:700;background:var(--accent);color:#3a2500;border-radius:4px;padding:1px 6px;margin-right:6px}
 .cat{display:inline-block;font-size:11px;font-weight:700;color:var(--main);background:var(--main-l);border-radius:4px;padding:1px 6px;margin-right:6px}
@@ -210,7 +212,7 @@ footer .ph{background:rgba(242,163,58,.25);color:#fff}
       <a href="dong.html">동 협의체</a>
       <a href="jawon.html">복지자원</a>
       <a href="#biz">주요사업</a>
-      <a href="#news">소식·공지</a>
+      <a href="news.html">소식·공지</a>
       <a href="gyehoek.html">자료실</a>
       <a href="#contact">참여·문의</a>
     </nav>
@@ -306,10 +308,8 @@ footer .ph{background:rgba(242,163,58,.25);color:#fff}
         </ul>
       </div>
       <div class="list">
-        <h3>활동 소식</h3>
-        <ul>
-          <li><span class="t">지금까지의 활동 소식은 <a href="https://cafe.daum.net/jungguwelfare" style="color:var(--main);font-weight:700">협의체 카페</a>에서 볼 수 있어요</span></li>
-        </ul>
+        <h3>활동 소식 <a href="news.html">더보기 +</a></h3>
+        <ul id="news-latest"><li><span class="t">소식을 불러오고 있어요…</span></li></ul>
       </div>
     </div>
   </div>
@@ -394,5 +394,13 @@ footer .ph{background:rgba(242,163,58,.25);color:#fff}
   </div>
 </footer>
 
+<script src="news.js"></script>
+<script>
+loadNews({ limit: 4 }).then(items => {
+  const el = document.getElementById("news-latest");
+  el.innerHTML = items.length ? items.map(n => `<li><a class="t" href="news.html"><span class="cat">${newsEsc(newsTag(n))}</span>${newsEsc(n.title)}</a><time>${newsDate(n.date)}</time></li>`).join("")
+    : `<li><span class="t">아직 올라온 소식이 없어요.</span></li>`;
+});
+</script>
 </body>
 </html>
