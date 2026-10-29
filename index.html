@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대구중구지역사회보장협의체</title>
+<meta name="description" content="민관이 함께 만드는 지역 복지, 대구중구지역사회보장협의체 홈페이지입니다. 실무분과, 동 협의체, 중구 복지자원, 지역사회보장계획을 소개합니다.">
+<meta property="og:title" content="대구중구지역사회보장협의체">
+<meta property="og:description" content="복지로 꽃피다! 민관협력이 이루어지는 곳">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --main:#3346A8; --main-d:#22307A; --main-l:#EEF0FA;
+  --sky:#29A8E0; --accent:#F2A33A; --ink:#1C2033; --muted:#5B6075; --line:#DFE2EE;
+  --bg:#ffffff; --soft:#F5F6FB; --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;word-break:keep-all;font-size:16px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.draft{background:var(--accent);color:#3a2500;text-align:center;font-size:13px;padding:6px 16px;font-weight:500}
+.ph{background:rgba(242,163,58,.22);border-radius:3px;padding:0 4px}
+
+/* 헤더 */
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:20}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:17px;color:var(--main-d)}
+.logo .mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--main),var(--sky));display:grid;place-items:center;color:#fff;font-size:13px;font-weight:700}
+.logo small{display:block;font-size:10.5px;font-weight:500;color:var(--muted);letter-spacing:.03em}
+.menu{display:flex;gap:20px;font-weight:500;font-size:15px}
+.menu a:hover{color:var(--main)}
+.burger{display:none;background:none;border:0;font-size:26px;cursor:pointer;color:var(--main-d)}
+@media(max-width:1020px){
+  .menu{display:none;position:absolute;top:70px;left:0;right:0;background:#fff;flex-direction:column;gap:0;border-bottom:1px solid var(--line)}
+  .menu.open{display:flex}
+  .menu a{padding:14px 16px;border-top:1px solid var(--line)}
+  .burger{display:block}
+}
+
+/* 히어로 */
+.hero{background:linear-gradient(120deg,var(--main-d) 0%,var(--main) 60%,#3F5BC4 100%);color:#fff;padding:76px 0 96px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;right:-60px;top:0;width:46%;height:100%;background:linear-gradient(115deg,transparent 0 30%,rgba(255,255,255,.06) 30% 55%,rgba(41,168,224,.18) 55% 100%)}
+.hero .wrap{position:relative}
+.hero p.kicker{display:inline-block;font-size:13px;font-weight:500;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 12px;margin-bottom:16px}
+.hero h1{font-size:clamp(30px,5.4vw,50px);font-weight:900;line-height:1.28;margin-bottom:18px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lead{max-width:580px;opacity:.92;margin-bottom:30px}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:700;font-size:15px}
+.btn.primary{background:var(--accent);color:#3a2500}
+.btn.ghost{border:1.5px solid rgba(255,255,255,.6);color:#fff}
+.btn.white{background:#fff;color:var(--main-d)}
+
+/* 빠른 메뉴 */
+.quick{margin-top:-48px;position:relative;z-index:2}
+.quick .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.quick a{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 18px;box-shadow:0 8px 22px rgba(34,48,122,.08);display:flex;flex-direction:column;gap:4px;transition:.2s}
+.quick a:hover{border-color:var(--main);transform:translateY(-2px)}
+.quick .ico{width:40px;height:40px;border-radius:10px;background:var(--main-l);display:grid;place-items:center;font-size:20px;margin-bottom:6px}
+.quick a b{font-size:16px}
+.quick a span{font-size:13px;color:var(--muted)}
+@media(max-width:720px){.quick .grid{grid-template-columns:repeat(2,1fr)}}
+
+section{padding:68px 0}
+.sec-title{display:flex;justify-content:space-between;align-items:end;margin-bottom:26px;gap:12px;flex-wrap:wrap}
+.sec-title .eyebrow{font-size:12px;font-weight:700;color:var(--sky);letter-spacing:.12em}
+.sec-title h2{font-size:26px;font-weight:900;color:var(--main-d)}
+.sec-title p{color:var(--muted);font-size:15px;margin-top:4px}
+.sec-title a{font-size:14px;color:var(--main);font-weight:500;white-space:nowrap}
+.soft{background:var(--soft)}
+
+/* 소개 */
+.about{display:grid;grid-template-columns:1.05fr 1fr;gap:36px;align-items:start}
+.about p{color:var(--muted);margin-bottom:12px}
+.chairs{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.chairs span{background:var(--main-l);color:var(--main-d);border-radius:8px;padding:6px 12px;font-size:14px;font-weight:500}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 18px}
+.stat b{display:block;font-size:34px;font-weight:900;color:var(--main);line-height:1.2}
+.stat b small{font-size:16px;font-weight:700;margin-left:2px}
+.stat span{font-size:14px;color:var(--muted)}
+.org{grid-column:1/-1;background:var(--main-d);color:#fff;border-radius:var(--radius);padding:18px;display:grid;grid-template-columns:repeat(4,1fr);text-align:center;gap:8px}
+.org b{display:block;font-size:22px;font-weight:900}
+.org span{font-size:12.5px;opacity:.8}
+@media(max-width:860px){.about{grid-template-columns:1fr}}
+@media(max-width:480px){.org{grid-template-columns:repeat(2,1fr)}}
+
+/* 공지/소식 */
+.board{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.list{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:8px 22px}
+.list h3{font-size:17px;padding:14px 0 10px;border-bottom:2px solid var(--main-d);display:flex;justify-content:space-between;color:var(--main-d)}
+.list h3 a{font-size:13px;font-weight:500;color:var(--muted)}
+.list li{list-style:none;display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.list li:last-child{border-bottom:0}
+.board>*{min-width:0}
+.list li span.t{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.list li time{color:var(--muted);font-size:13px;flex-shrink:0}
+.tag{display:inline-block;font-size:11px;font-weight:700;background:var(--accent);color:#3a2500;border-radius:4px;padding:1px 6px;margin-right:6px}
+.cat{display:inline-block;font-size:11px;font-weight:700;color:var(--main);background:var(--main-l);border-radius:4px;padding:1px 6px;margin-right:6px}
+@media(max-width:860px){.board{grid-template-columns:1fr}}
+
+/* 실무분과 */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;transition:.2s;display:flex;flex-direction:column}
+.card:hover{border-color:var(--main);transform:translateY(-2px);box-shadow:0 8px 20px rgba(34,48,122,.08)}
+.card .no{font-size:12px;font-weight:700;color:var(--sky)}
+.card h3{font-size:18px;margin:2px 0 6px;color:var(--main-d)}
+.card p{font-size:14.5px;color:var(--ink);flex:1}
+.card .meta{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:13px;color:var(--muted)}
+.common{margin-top:18px;background:var(--main-l);border-radius:var(--radius);padding:16px 20px;font-size:14.5px;color:var(--main-d)}
+.common b{margin-right:8px}
+@media(max-width:860px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.cards{grid-template-columns:1fr}}
+
+/* 주요사업 */
+.biz{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.biz article{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff}
+.biz .top{padding:22px;color:#fff;min-height:118px;display:flex;flex-direction:column;justify-content:flex-end}
+.biz .top small{font-size:12px;opacity:.85}
+.biz .top h3{font-size:20px;font-weight:900}
+.biz .b1 .top{background:linear-gradient(135deg,#E9802F,var(--accent))}
+.biz .b2 .top{background:linear-gradient(135deg,var(--main-d),var(--main))}
+.biz .b3 .top{background:linear-gradient(135deg,#1E86B8,var(--sky))}
+.biz .body{padding:18px 22px 22px;font-size:14.5px;color:var(--muted)}
+.biz .body ul{list-style:none;margin-top:8px}
+.biz .body li{padding-left:12px;position:relative;margin-top:4px}
+.biz .body li::before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--sky)}
+@media(max-width:860px){.biz{grid-template-columns:1fr}}
+
+/* 동 협의체 */
+.dongs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.dong{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:8px;transition:.2s}
+.dong:hover{border-color:var(--main)}
+.dong b{font-size:15.5px}
+.dong a.tel{font-size:13.5px;color:var(--main);font-weight:700;white-space:nowrap}
+.dong-note{margin-top:14px;font-size:13.5px;color:var(--muted)}
+@media(max-width:860px){.dongs{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:400px){.dongs{grid-template-columns:1fr}}
+
+/* 계획 배너 */
+.plan{background:linear-gradient(120deg,var(--main-d),var(--main));color:#fff;border-radius:20px;padding:36px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.plan h3{font-size:22px;font-weight:900;margin-bottom:6px}
+.plan p{opacity:.88;font-size:15px}
+
+/* 푸터 */
+footer{background:#151A33;color:#B6BBD1;padding:42px 0;font-size:14px}
+footer .row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer b{color:#fff;font-size:16px}
+footer .links{display:flex;gap:16px;flex-wrap:wrap}
+footer .links a{color:#fff}
+footer .ph{background:rgba(242,163,58,.25);color:#fff}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo"><span class="mark">중구</span><span>대구중구지역사회보장협의체<small>DAEGU JUNG-GU SOCIAL SECURITY COUNCIL</small></span></a>
+    <nav class="menu" id="menu">
+      <a href="#about">협의체 소개</a>
+      <a href="bunkwa.html">실무분과</a>
+      <a href="dong.html">동 협의체</a>
+      <a href="jawon.html">복지자원</a>
+      <a href="#biz">주요사업</a>
+      <a href="#news">소식·공지</a>
+      <a href="gyehoek.html">자료실</a>
+      <a href="#contact">참여·문의</a>
+    </nav>
+    <button class="burger" aria-label="메뉴 열기" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="kicker">2005년부터 함께해 온 민관협력의 구심점</p>
+    <h1><em>복지로 꽃피다!</em><br>민관협력이 이루어지는 곳</h1>
+    <p class="lead">대구중구지역사회보장협의체는 공공과 민간이 함께 지역의 복지 문제를 발견하고, 자원을 연결하며, 지역사회보장계획을 심의·점검하는 민관협력 기구입니다.</p>
+    <div class="btns">
+      <a href="#about" class="btn primary">협의체 알아보기</a>
+      <a href="#dong" class="btn ghost">도움이 필요해요</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap quick">
+  <div class="grid">
+    <a href="#dong"><span class="ico">🤝</span><b>이웃 돌봄 연결</b><span>도움이 필요한 이웃, 동 복지팀으로</span></a>
+    <a href="gyehoek.html"><span class="ico">📘</span><b>지역사회보장계획</b><span>제5기·제6기 자료실</span></a>
+    <a href="#news"><span class="ico">📢</span><b>공지사항</b><span>회의·교육·모집 안내</span></a>
+    <a href="jawon.html"><span class="ico">🗺️</span><b>복지자원 현황</b><span>중구 복지기관 55곳 찾기</span></a>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap about">
+    <div>
+      <div class="sec-title"><div><div class="eyebrow">ABOUT</div><h2>협의체 소개</h2></div></div>
+      <p>「사회보장급여의 이용·제공 및 수급권자 발굴에 관한 법률」 제41조와 「대구광역시 중구 지역사회보장협의체 운영조례」에 근거해 설치된 민관협력 기구입니다.</p>
+      <p>대표협의체는 지역사회보장 관련 사항을 심의·자문하고, 실무협의체는 안건을 사전 검토하며, 9개 실무분과와 12개 동 협의체가 기관 간 협력과 복지사각지대 발굴을 맡습니다.</p>
+      <div class="chairs"><span>공동위원장 류규하 (중구청장)</span><span>공동위원장 윤보경 (남산종합사회복지관장)</span></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>2005</b><span>설립 (구 협의체 11기)</span></div>
+      <div class="stat"><b>359<small>명</small></b><span>함께하는 위원</span></div>
+      <div class="stat"><b>9<small>개</small></b><span>실무분과</span></div>
+      <div class="stat"><b>12<small>개</small></b><span>동 협의체 (5기)</span></div>
+      <div class="org">
+        <div><b>26</b><span>대표협의체</span></div>
+        <div><b>36</b><span>실무협의체</span></div>
+        <div><b>93</b><span>실무분과</span></div>
+        <div><b>204</b><span>동 협의체</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="news" class="soft">
+  <div class="wrap">
+    <div class="sec-title"><div><div class="eyebrow">NEWS</div><h2>소식·공지</h2></div></div>
+    <div class="board">
+      <div class="list">
+        <h3>공지사항</h3>
+        <ul>
+          <li><span class="t"><span class="tag">NEW</span>대구중구지역사회보장협의체 홈페이지를 열었습니다</span><time>2026.10.29</time></li>
+        </ul>
+      </div>
+      <div class="list">
+        <h3>활동 소식</h3>
+        <ul>
+          <li><span class="t">지금까지의 활동 소식은 <a href="https://cafe.daum.net/jungguwelfare" style="color:var(--main);font-weight:700">협의체 카페</a>에서 볼 수 있어요</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bunkwa">
+  <div class="wrap">
+    <div class="sec-title"><div><div class="eyebrow">COMMITTEES</div><h2>실무분과</h2><p>기관·법인·단체·시설 간 연계와 협력, 지역사회보장계획 모니터링, 특성화 사업을 추진합니다.</p></div><a href="bunkwa.html">분과 상세 보기 →</a></div>
+    <div class="cards">
+      <a class="card" href="bunkwa.html#plan"><div class="no">01</div><h3>복지기획분과</h3><p>협의체 운영의 중심, 분과 간 협력을 기획합니다</p><div class="meta">공동사업 기획 · 위원 역량강화 · 격월 둘째 주 수요일</div></a>
+      <a class="card" href="bunkwa.html#village"><div class="no">02</div><h3>복지마을분과</h3><p>12개 동 협의체와 함께 마을복지를 키웁니다</p><div class="meta">동협의체 컨설팅 · 성과보고회 · 격월 둘째 주 수요일</div></a>
+      <a class="card" href="bunkwa.html#job"><div class="no">03</div><h3>일자리분과</h3><p>일하며 자립하는 삶을 지원합니다</p><div class="meta">주거·자활·일자리 교육 · 격월 둘째 주 수요일</div></a>
+      <a class="card" href="bunkwa.html#senior"><div class="no">04</div><h3>노인분과</h3><p>어르신의 안녕을 마을이 함께 살핍니다</p><div class="meta">경로당 활성화 · 좋은돌봄 ‘마음과 마을을 잇다’</div></a>
+      <a class="card" href="bunkwa.html#disability"><div class="no">05</div><h3>장애인분과</h3><p>장애에 대한 인식을 바꾸고 함께 어울립니다</p><div class="meta">발달장애인 실태조사 · 어울림장터 · 격월 셋째 주 수요일</div></a>
+      <a class="card" href="bunkwa.html#family"><div class="no">06</div><h3>여성가족분과</h3><p>건강한 가족, 든든한 지역을 만듭니다</p><div class="meta">가족상담·가족치료 교육 · 격월 넷째 주 화요일</div></a>
+      <a class="card" href="bunkwa.html#child"><div class="no">07</div><h3>아동청소년분과</h3><p>아이들이 안전하게 자라는 중구를 만듭니다</p><div class="meta">아동학대 예방·아동심리 교육 · 격월 넷째 주 화요일</div></a>
+      <a class="card" href="bunkwa.html#suicide"><div class="no">08</div><h3>자살예방분과</h3><p>생명을 지키는 지역 안전망을 만듭니다</p><div class="meta">자살예방 교육·홍보 · 격월 넷째 주 목요일</div></a>
+      <a class="card" href="bunkwa.html#isolation"><div class="no">09</div><h3>사회적고립예방분과</h3><p>혼자가 아닌, 연결된 이웃을 만듭니다</p><div class="meta">고립·고독사 위험 이웃 발굴 협력 · 격월 둘째 주 수요일</div></a>
+    </div>
+    <div class="common"><b>모든 분과 공통</b>격월 정기회의(소속기관 순번제) · 협의체 공동사업 참여 · 12월 실무분과 연합회의</div>
+  </div>
+</section>
+
+<section id="biz" class="soft">
+  <div class="wrap">
+    <div class="sec-title"><div><div class="eyebrow">PROJECTS</div><h2>주요사업</h2></div></div>
+    <div class="biz">
+      <article class="b1"><div class="top"><small>2007년부터 이어 온 중점 특화사업</small><h3>따뜻한 중구만들기</h3></div>
+        <div class="body">저소득 가정에 연탄·난방비를 지원해 왔고, 2023년부터는 방한용품 온(溫) 키트를 만들어 전달합니다.<ul><li>연 1회 · 구·동 협의체 위원과 종사자 150여 명 참여</li></ul></div></article>
+      <article class="b2"><div class="top"><small>동 협의체 위원 맞춤형 교육</small><h3>중구복지리더아카데미</h3></div>
+        <div class="body">동 협의체 위원, 복지통장, 명예사회복지공무원이 함께하는 복지리더 양성 과정입니다.<ul><li>총 4회차 · 40여 명 · 강의·토론·우수 동 탐방</li></ul></div></article>
+      <article class="b3"><div class="top"><small>동 협의체 특화사업</small><h3>1마을 1특화</h3></div>
+        <div class="body">주민이 지역 문제를 찾고 해결하는 동 단위 특화사업입니다. 전문위원회 심사로 선정합니다.<ul><li>동별 300만 원 내외 지원</li><li>고독사 예방·정서지원 사업 중심</li></ul></div></article>
+    </div>
+  </div>
+</section>
+
+<section id="dong">
+  <div class="wrap">
+    <div class="sec-title"><div><div class="eyebrow">COMMUNITY</div><h2>동 지역사회보장협의체</h2><p>도움이 필요한 이웃이 있다면 우리 동 행정복지센터 복지팀으로 연락해 주세요.</p></div></div>
+    <div class="dongs">
+      <div class="dong"><a href="dong.html#dongin"><b>동인동</b></a><a class="tel" href="tel:053-661-3552">053-661-3552</a></div>
+      <div class="dong"><a href="dong.html#samdeok"><b>삼덕동</b></a><a class="tel" href="tel:053-661-3592">053-661-3592</a></div>
+      <div class="dong"><a href="dong.html#seongnae1"><b>성내1동</b></a><a class="tel" href="tel:053-661-3613">053-661-3613</a></div>
+      <div class="dong"><a href="dong.html#seongnae2"><b>성내2동</b></a><a class="tel" href="tel:053-661-3632">053-661-3632</a></div>
+      <div class="dong"><a href="dong.html#seongnae3"><b>성내3동</b></a><a class="tel" href="tel:053-661-3661">053-661-3661</a></div>
+      <div class="dong"><a href="dong.html#daesin"><b>대신동</b></a><a class="tel" href="tel:053-661-3674">053-661-3674</a></div>
+      <div class="dong"><a href="dong.html#namsan1"><b>남산1동</b></a><a class="tel" href="tel:053-661-3692">053-661-3692</a></div>
+      <div class="dong"><a href="dong.html#namsan2"><b>남산2동</b></a><a class="tel" href="tel:053-661-3712">053-661-3712</a></div>
+      <div class="dong"><a href="dong.html#namsan3"><b>남산3동</b></a><a class="tel" href="tel:053-661-3732">053-661-3732</a></div>
+      <div class="dong"><a href="dong.html#namsan4"><b>남산4동</b></a><a class="tel" href="tel:053-661-3753">053-661-3753</a></div>
+      <div class="dong"><a href="dong.html#daebong1"><b>대봉1동</b></a><a class="tel" href="tel:053-661-3772">053-661-3772</a></div>
+      <div class="dong"><a href="dong.html#daebong2"><b>대봉2동</b></a><a class="tel" href="tel:053-661-3792">053-661-3792</a></div>
+    </div>
+    <p class="dong-note">복지통장, 명예사회복지공무원, 보장시설 종사자, 자원봉사자 등 204명의 위원이 이웃을 살핍니다. · 보건복지상담센터 ☎ 129</p>
+  </div>
+</section>
+
+<section id="plan" style="padding-top:0">
+  <div class="wrap">
+    <div class="plan">
+      <div>
+        <h3>지역사회보장계획 자료실</h3>
+        <p>제5기(2023~2026)와 제6기(2027~2030) 지역사회보장계획의 세부사업과 모니터링 현황을 나눠 소개합니다.</p>
+      </div>
+      <a href="gyehoek.html" class="btn white">자료실 바로가기</a>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap row">
+    <div>
+      <b>대구중구지역사회보장협의체 사무국</b>
+      <p style="margin-top:8px">주소 대구광역시 중구 국채보상로139길 1, 4층<br>
+      전화 053-661-2288 · 이메일 actor0204@korea.kr</p>
+    </div>
+    <div>
+      <div class="links"><a href="https://map.kakao.com/?q=%EB%8C%80%EA%B5%AC%20%EC%A4%91%EA%B5%AC%20%EA%B5%AD%EC%B1%84%EB%B3%B4%EC%83%81%EB%A1%9C139%EA%B8%B8%201">찾아오시는 길</a><a href="https://cafe.daum.net/jungguwelfare">협의체 카페</a></div>
+      <p style="margin-top:10px">© 2026 대구중구지역사회보장협의체</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

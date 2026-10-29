@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>동 협의체 | 대구중구지역사회보장협의체</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --main:#3346A8; --main-d:#22307A; --main-l:#EEF0FA;
+  --sky:#29A8E0; --accent:#F2A33A; --ink:#1C2033; --muted:#5B6075; --line:#DFE2EE;
+  --bg:#ffffff; --soft:#F5F6FB; --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;word-break:keep-all;font-size:16px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.draft{background:var(--accent);color:#3a2500;text-align:center;font-size:13px;padding:6px 16px;font-weight:500}
+.ph{background:rgba(242,163,58,.22);border-radius:3px;padding:0 4px}
+
+/* 헤더 (메인과 동일) */
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:20}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:17px;color:var(--main-d)}
+.logo .mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--main),var(--sky));display:grid;place-items:center;color:#fff;font-size:13px;font-weight:700}
+.logo small{display:block;font-size:10.5px;font-weight:500;color:var(--muted);letter-spacing:.03em}
+.menu{display:flex;gap:20px;font-weight:500;font-size:15px}
+.menu a:hover,.menu a.on{color:var(--main)}
+.menu a.on{font-weight:700}
+.burger{display:none;background:none;border:0;font-size:26px;cursor:pointer;color:var(--main-d)}
+@media(max-width:1020px){
+  .menu{display:none;position:absolute;top:70px;left:0;right:0;background:#fff;flex-direction:column;gap:0;border-bottom:1px solid var(--line)}
+  .menu.open{display:flex}
+  .menu a{padding:14px 16px;border-top:1px solid var(--line)}
+  .burger{display:block}
+}
+
+.sub-hero{background:linear-gradient(120deg,var(--main-d),var(--main));color:#fff;padding:40px 0 44px}
+.crumb{font-size:13px;opacity:.8;margin-bottom:8px}
+.crumb a:hover{text-decoration:underline}
+.sub-hero h1{font-size:clamp(26px,4vw,34px);font-weight:900}
+.sub-hero p{opacity:.88;margin-top:6px;font-size:15px}
+
+/* 레이아웃 */
+.layout{display:grid;grid-template-columns:200px 1fr;gap:36px;padding:40px 16px 72px}
+.layout>*{min-width:0}
+.side{position:sticky;top:94px;align-self:start}
+.side ul{list-style:none;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.side li a{display:block;padding:10px 16px;font-size:15px;border-top:1px solid var(--line)}
+.side li:first-child a{border-top:0;font-weight:700}
+.side li a:hover{background:var(--soft)}
+.side li a.on{background:var(--main);color:#fff;font-weight:700}
+@media(max-width:860px){
+  .layout{grid-template-columns:1fr;gap:20px;padding-top:20px}
+  .side{position:static}
+  .side ul{display:flex;overflow-x:auto;border:0;border-radius:0;gap:8px;padding-bottom:6px;scrollbar-width:none}
+  .side li a{border:1px solid var(--line);border-radius:999px;padding:8px 14px;white-space:nowrap;font-size:14px}
+  .side li:first-child a{border-top:1px solid var(--line)}
+}
+
+/* 공통 */
+.head .no{font-size:13px;font-weight:700;color:var(--sky);letter-spacing:.08em}
+.head h2{font-size:30px;font-weight:900;color:var(--main-d);line-height:1.3}
+.head .desc{color:var(--muted);margin-top:8px;font-size:15.5px}
+h3.st{font-size:19px;font-weight:900;color:var(--main-d);margin:0 0 14px;display:flex;align-items:center;gap:8px}
+h3.st::before{content:"";width:4px;height:18px;background:var(--accent);border-radius:2px}
+.block{margin-top:40px}
+.note{font-size:13.5px;color:var(--muted);margin-top:10px}
+
+/* 개요: 역할 */
+.roles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.roles div{background:var(--soft);border-radius:12px;padding:16px}
+.roles b{display:block;font-size:13px;color:var(--sky)}
+.roles p{font-size:15px;margin-top:4px;font-weight:500}
+@media(max-width:760px){.roles{grid-template-columns:repeat(2,1fr)}}
+
+.members{display:flex;gap:16px;align-items:center;background:var(--main-d);color:#fff;border-radius:var(--radius);padding:20px 24px;flex-wrap:wrap}
+.members b{font-size:34px;font-weight:900;line-height:1}
+.members p{font-size:15px;opacity:.9;flex:1;min-width:220px}
+
+/* 특화사업 단계 */
+.steps{list-style:none;display:grid;grid-template-columns:repeat(6,1fr);gap:8px;counter-reset:s}
+.steps li{border:1px solid var(--line);border-radius:12px;padding:14px 12px;position:relative;counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--main);color:#fff;font-size:12px;font-weight:700;margin-bottom:8px}
+.steps b{display:block;font-size:14.5px}
+.steps span{font-size:12.5px;color:var(--muted)}
+@media(max-width:860px){.steps{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.steps{grid-template-columns:repeat(2,1fr)}}
+
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.projects div{border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.projects b{font-size:16px;color:var(--main-d)}
+.projects p{font-size:14.5px;margin-top:2px}
+.projects span{font-size:13px;color:var(--muted)}
+@media(max-width:640px){.projects{grid-template-columns:1fr}}
+
+.grid12{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.grid12 a{border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;transition:.2s}
+.grid12 a:hover{border-color:var(--main);transform:translateY(-2px)}
+.grid12 b{font-size:16px}
+.grid12 span{font-size:13px;color:var(--main);font-weight:700}
+@media(max-width:860px){.grid12{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.grid12{grid-template-columns:repeat(2,1fr)}}
+
+.files{display:flex;gap:10px;flex-wrap:wrap}
+.files a{border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-size:14.5px;font-weight:500}
+.files a::before{content:"⬇ ";color:var(--main)}
+.files a:hover{border-color:var(--main)}
+
+/* 상세 */
+.call{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:var(--main-l);border-radius:var(--radius);padding:20px 24px;margin-top:22px}
+.call small{display:block;font-size:13px;color:var(--muted)}
+.call b{font-size:18px;color:var(--main-d)}
+.call a{background:var(--main);color:#fff;border-radius:999px;padding:12px 22px;font-weight:700;white-space:nowrap}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.fact{background:var(--soft);border-radius:12px;padding:16px 18px}
+.fact small{display:block;font-size:12.5px;color:var(--muted)}
+.fact b{font-size:16px;color:var(--main-d)}
+@media(max-width:600px){.facts{grid-template-columns:1fr}}
+
+.acts{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.acts li{border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:15px}
+.acts li b{display:block;color:var(--main-d)}
+.acts li span{font-size:13.5px;color:var(--muted)}
+@media(max-width:600px){.acts{grid-template-columns:1fr}}
+
+.spec{border:2px solid var(--accent);border-radius:var(--radius);padding:20px 22px}
+.spec .tag{display:inline-block;font-size:12px;font-weight:700;background:var(--accent);color:#3a2500;border-radius:4px;padding:1px 7px}
+.spec h4{font-size:19px;margin:6px 0 4px;color:var(--main-d)}
+.spec p{font-size:15px;color:var(--muted)}
+.spec dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin-top:12px;font-size:14.5px}
+.spec dt{color:var(--muted)}
+.spec dd{font-weight:500}
+
+.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.photos div{aspect-ratio:4/3;border-radius:12px;background:repeating-linear-gradient(45deg,var(--soft) 0 10px,#EBEDF6 10px 20px);display:grid;place-items:center;color:var(--muted);font-size:13px;text-align:center;padding:8px}
+@media(max-width:600px){.photos{grid-template-columns:repeat(2,1fr)}}
+
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
+.pager a{display:flex;flex-direction:column;font-size:13px;color:var(--muted)}
+.pager a b{font-size:16px;color:var(--main-d)}
+.pager a.next{text-align:right;margin-left:auto}
+
+footer{background:#151A33;color:#B6BBD1;padding:36px 0;font-size:14px}
+footer b{color:#fff}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="./" class="logo"><span class="mark">중구</span><span>대구중구지역사회보장협의체<small>DAEGU JUNG-GU SOCIAL SECURITY COUNCIL</small></span></a>
+    <nav class="menu" id="menu">
+      <a href="index.html#about">협의체 소개</a>
+      <a href="bunkwa.html">실무분과</a>
+      <a href="dong.html" class="on">동 협의체</a>
+      <a href="jawon.html">복지자원</a>
+      <a href="index.html#biz">주요사업</a>
+      <a href="index.html#news">소식·공지</a>
+      <a href="gyehoek.html">자료실</a>
+      <a href="index.html#contact">참여·문의</a>
+    </nav>
+    <button class="burger" aria-label="메뉴 열기" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<div class="sub-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="./">홈</a> › <a href="dong.html">동 협의체</a><span id="crumb-name"></span></div>
+    <h1>동 지역사회보장협의체</h1>
+    <p>12개 동에서 204명의 위원이 복지사각지대를 발굴하고 이웃과 자원을 잇습니다</p>
+  </div>
+</div>
+
+<div class="wrap layout">
+  <aside class="side"><ul id="side"></ul></aside>
+  <main id="content" aria-live="polite"></main>
+</div>
+
+<footer>
+  <div class="wrap"><b>대구중구지역사회보장협의체 사무국</b> · 대구광역시 중구 국채보상로139길 1, 4층 · 전화 053-661-2288 · actor0204@korea.kr · © 2026</div>
+</footer>
+
+<script>
+// ▼ 동 데이터: 각 동 정보는 여기만 고치면 됩니다.
+// 연락처 출처: 중구 12개동 복지팀 연락처 / 사업 출처: 2026년 협의체 안내자료
+const DONGS = [
+  { id: "dongin",  name: "동인동",  tel: "053-661-3552",
+    best: { title: "동행봉사단과 함께하는 고독사 예방사업",
+            badge: "2023년 대구시 우수 자원봉사 프로그램 공모 선정",
+            desc: "동 협의체 주민 37명이 동행봉사단을 꾸려 1인 중장년·취약계층 가구의 안부를 정기적으로 확인했습니다. 동 행정복지센터, 중구자원봉사센터, 민간기관이 함께했습니다.",
+            facts: [["기간", "2023년 4월 ~ 9월"], ["사업비", "3,740천 원"], ["주요 활동", "안부확인, 밑반찬 만들기, 고독사 zero 캠페인, 문화활동, 해피클린"], ["성과", "월 2회(총 12회) 밑반찬을 만들어 고독사 위기가구 구성원 452명에게 전달"]] } },
+  { id: "samdeok", name: "삼덕동",  tel: "053-661-3592" },
+  { id: "seongnae1", name: "성내1동", tel: "053-661-3613" },
+  { id: "seongnae2", name: "성내2동", tel: "053-661-3632" },
+  { id: "seongnae3", name: "성내3동", tel: "053-661-3661" },
+  { id: "daesin",  name: "대신동",  tel: "053-661-3674" },
+  { id: "namsan1", name: "남산1동", tel: "053-661-3692" },
+  { id: "namsan2", name: "남산2동", tel: "053-661-3712" },
+  { id: "namsan3", name: "남산3동", tel: "053-661-3732" },
+  { id: "namsan4", name: "남산4동", tel: "053-661-3753" },
+  { id: "daebong1", name: "대봉1동", tel: "053-661-3772" },
+  { id: "daebong2", name: "대봉2동", tel: "053-661-3792" }
+];
+
+const PROJECTS = [
+  ["얼굴한번 봅시다!", "고독사 없는 행복한 우리동네 만들기", "취약계층 및 50~60대 1인 가구 지원"],
+  ["청춘을 돌려 Dream", "사회와 단절된 홀로어르신 고독사 위험군 예방관리", "고독사 위험군 중 실사 방문 거부자 지원"],
+  ["꽃보다 할매, 할배", "대문밖은 재밌어 정서지원 사업", "정서지원을 통한 우울감 해소 및 모니터링"],
+  ["청춘 어게인 해봄", "은둔형 노인가구 고독사 예방", "은둔형 가구 안부확인과 외부단절 방지 정서지원"],
+  ["안부톡(Tok) 푸드톡(Tok)", "고독사 위험군 예방관리", "취약계층 가구원 20여 명, 지역자원과 함께 만드는 맞춤형 복지"]
+];
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function overview(){
+  return `
+  <div class="head">
+    <div class="no">OVERVIEW</div>
+    <h2>동 협의체는 이런 일을 합니다</h2>
+    <p class="desc">「사회보장급여법 시행규칙」 제7조에 따라 읍·면·동 단위로 구성되어, 우리 동네 가장 가까운 곳에서 도움이 필요한 이웃을 찾고 자원을 연결합니다.</p>
+  </div>
+  <section class="block">
+    <h3 class="st">4가지 역할</h3>
+    <div class="roles">
+      <div><b>01</b><p>도움이 필요한 이웃 발굴</p></div>
+      <div><b>02</b><p>사회보장 자원 발굴·연계</p></div>
+      <div><b>03</b><p>지역사회 보호체계 구축·운영</p></div>
+      <div><b>04</b><p>주민 사회보장 증진 활동</p></div>
+    </div>
+  </section>
+  <section class="block">
+    <h3 class="st">구성</h3>
+    <div class="members"><b>204명</b><p>12개 동 · 5기 동 협의체<br>복지통장, 명예사회복지공무원, 보장시설 종사자, 자원봉사자, 복지위원</p></div>
+  </section>
+  <section class="block">
+    <h3 class="st">우리 동 협의체 바로가기</h3>
+    <div class="grid12">${DONGS.map(d => `<a href="#${d.id}"><b>${esc(d.name)}</b><span>${esc(d.tel)}</span></a>`).join("")}</div>
+    <p class="note">도움이 필요한 이웃이 있다면 해당 동 행정복지센터 복지팀으로 연락해 주세요. · 보건복지상담센터 ☎ 129</p>
+  </section>
+  <section class="block">
+    <h3 class="st">1마을 1특화 사업</h3>
+    <p class="desc" style="color:var(--muted);margin-bottom:14px">주민이 지역 문제를 찾고 해결하며 공동체의식을 키우는 동 단위 특화사업입니다. 전문위원회 심사로 선정하며, 동별 300만 원 내외를 차등 지원합니다.</p>
+    <ol class="steps">
+      <li><b>사업 설명회</b><span>동 협의체 위원장·위원, 복지팀장</span></li>
+      <li><b>사업신청 접수</b><span>각 동 협의체</span></li>
+      <li><b>전문위원회 심사</b><span>전문위원 6인</span></li>
+      <li><b>선정·결과 통보</b><span>구 협의체</span></li>
+      <li><b>사업비 교부</b><span>사회복지공동모금회</span></li>
+      <li><b>사업 실행</b><span>선정 동 협의체</span></li>
+    </ol>
+    <h3 class="st" style="margin-top:28px;font-size:17px">2025년 선정 사업</h3>
+    <div class="projects">${PROJECTS.map(p => `<div><b>${esc(p[0])}</b><p>${esc(p[1])}</p><span>${esc(p[2])}</span></div>`).join("")}</div>
+    <p class="note">사업별 해당 동은 확인 후 표기 예정</p>
+  </section>
+  <section class="block">
+    <h3 class="st">함께하는 활동</h3>
+    <ul class="acts">
+      <li><b>중구복지리더아카데미</b><span>동 협의체 위원·복지통장·명예사회복지공무원 대상 4회차 교육</span></li>
+      <li><b>동 협의체 성과보고회</b><span>매년 12월, 12개 동 성과 보고와 우수사례 발표·포상</span></li>
+      <li><b>동 협의체 컨설팅</b><span>위원 욕구조사와 운영 자체평가 (복지마을분과)</span></li>
+      <li><b>복지팀장 간담회</b><span>12개 동 복지팀장과 연 1~2회 협업 간담회</span></li>
+    </ul>
+  </section>`;
+}
+
+function detail(d, i){
+  const prev = DONGS[(i + 11) % 12], next = DONGS[(i + 1) % 12];
+  const best = d.best ? `
+    <section class="block">
+      <h3 class="st">우수사례</h3>
+      <div class="spec"><span class="tag">${esc(d.best.badge)}</span><h4>${esc(d.best.title)}</h4><p>${esc(d.best.desc)}</p>
+        <dl>${d.best.facts.map(f => `<dt>${esc(f[0])}</dt><dd>${esc(f[1])}</dd>`).join("")}</dl></div>
+    </section>` : "";
+  return `
+  <div class="head">
+    <div class="no">DONG ${String(i + 1).padStart(2, "0")}</div>
+    <h2>${esc(d.name)} 지역사회보장협의체</h2>
+    <p class="desc">${esc(d.name)} 주민과 함께 복지사각지대를 발굴하고, 이웃과 지역 자원을 연결합니다.</p>
+  </div>
+  <div class="call">
+    <div><small>도움이 필요한 이웃이 있다면</small><b>${esc(d.name)} 행정복지센터 복지팀 ${esc(d.tel)}</b></div>
+    <a href="tel:${esc(d.tel)}">전화 걸기</a>
+  </div>
+  ${best}
+  <section class="block">
+    <h3 class="st">주요 활동</h3>
+    <ul class="acts">
+      <li><b>복지사각지대 발굴</b><span>위원이 이웃을 살피고 도움이 필요한 가구를 복지팀에 연결</span></li>
+      <li><b>자원 발굴·연계</b><span>지역 상가·기관과 함께 나눔 자원 발굴</span></li>
+      <li><b>정기회의</b><span>동 복지현안 공유와 지원 방안 논의</span></li>
+      <li><b>구 협의체 공동사업 참여</b><span>따뜻한 중구만들기, 복지리더아카데미, 성과보고회</span></li>
+    </ul>
+  </section>
+  <nav class="pager" aria-label="이전·다음 동">
+    <a href="#${prev.id}">← 이전 동<b>${esc(prev.name)}</b></a>
+    <a class="next" href="#${next.id}">다음 동 →<b>${esc(next.name)}</b></a>
+  </nav>`;
+}
+
+function render(id){
+  const i = DONGS.findIndex(d => d.id === id);
+  const d = DONGS[i];
+  document.title = `${d ? d.name + " | " : ""}동 협의체 | 대구중구지역사회보장협의체`;
+  document.getElementById("crumb-name").textContent = d ? " › " + d.name : "";
+  document.getElementById("side").innerHTML =
+    `<li><a href="#" class="${d ? "" : "on"}">개요</a></li>` +
+    DONGS.map(x => `<li><a href="#${x.id}" class="${d && x.id === d.id ? "on" : ""}">${esc(x.name)}</a></li>`).join("");
+  document.getElementById("content").innerHTML = d ? detail(d, i) : overview();
+  const on = document.querySelector(".side a.on");
+  if (on) on.scrollIntoView({block: "nearest", inline: "center"});
+}
+
+window.addEventListener("hashchange", () => { render(location.hash.slice(1)); window.scrollTo({top: 0}); });
+render(location.hash.slice(1));
+</script>
+</body>
+</html>

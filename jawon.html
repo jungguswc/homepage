@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>복지자원 현황 | 대구중구지역사회보장협의체</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --main:#3346A8; --main-d:#22307A; --main-l:#EEF0FA;
+  --sky:#29A8E0; --accent:#F2A33A; --ink:#1C2033; --muted:#5B6075; --line:#DFE2EE;
+  --bg:#ffffff; --soft:#F5F6FB; --ok:#1E7A4C; --ok-l:#E3F4EA; --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;word-break:keep-all;font-size:16px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.draft{background:var(--accent);color:#3a2500;text-align:center;font-size:13px;padding:6px 16px;font-weight:500}
+
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:20}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:17px;color:var(--main-d)}
+.logo .mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--main),var(--sky));display:grid;place-items:center;color:#fff;font-size:13px;font-weight:700}
+.logo small{display:block;font-size:10.5px;font-weight:500;color:var(--muted);letter-spacing:.03em}
+.menu{display:flex;gap:20px;font-weight:500;font-size:15px}
+.menu a:hover,.menu a.on{color:var(--main)}
+.menu a.on{font-weight:700}
+.burger{display:none;background:none;border:0;font-size:26px;cursor:pointer;color:var(--main-d)}
+@media(max-width:1020px){
+  .menu{display:none;position:absolute;top:70px;left:0;right:0;background:#fff;flex-direction:column;gap:0;border-bottom:1px solid var(--line)}
+  .menu.open{display:flex}
+  .menu a{padding:14px 16px;border-top:1px solid var(--line)}
+  .burger{display:block}
+}
+
+.sub-hero{background:linear-gradient(120deg,var(--main-d),var(--main));color:#fff;padding:40px 0 44px}
+.crumb{font-size:13px;opacity:.8;margin-bottom:8px}
+.crumb a:hover{text-decoration:underline}
+.sub-hero h1{font-size:clamp(26px,4vw,34px);font-weight:900}
+.sub-hero p{opacity:.88;margin-top:6px;font-size:15px}
+
+main{padding-block:32px 72px}
+.tools{display:flex;flex-direction:column;gap:14px;position:sticky;top:70px;background:var(--bg);padding:14px 0;z-index:5;border-bottom:1px solid var(--line)}
+.search{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;max-width:460px}
+.search:focus-within{border-color:var(--main)}
+.search input{border:0;outline:0;font:inherit;font-size:15px;flex:1;min-width:0;background:transparent;color:var(--ink)}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chip{flex-shrink:0;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink);white-space:nowrap}
+.chip b{font-weight:700;color:var(--main);margin-left:4px;font-variant-numeric:tabular-nums}
+.chip[aria-pressed="true"]{background:var(--main);border-color:var(--main);color:#fff}
+.chip[aria-pressed="true"] b{color:#fff}
+.chip:focus-visible,.search input:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+
+.note{display:flex;gap:10px;align-items:flex-start;background:var(--main-l);color:var(--main-d);border-radius:12px;padding:14px 16px;font-size:14px;margin:22px 0 8px}
+.note b{white-space:nowrap}
+
+.group{margin-top:34px}
+.group h2{font-size:20px;font-weight:900;color:var(--main-d);display:flex;align-items:baseline;gap:8px;margin-bottom:12px}
+.group h2 span{font-size:14px;color:var(--muted);font-weight:500;font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.item{border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.item .nm{font-weight:700;font-size:16px;display:flex;gap:8px;align-items:flex-start;justify-content:space-between}
+.item .ok{flex-shrink:0;font-size:11px;font-weight:700;color:var(--ok);background:var(--ok-l);border-radius:4px;padding:1px 6px;margin-top:3px}
+.item .ad{font-size:14px;color:var(--muted)}
+.item .tel{font-size:14.5px;font-weight:700;color:var(--main);font-variant-numeric:tabular-nums;margin-top:2px;user-select:all;align-self:flex-start}
+.empty{padding:40px 0;text-align:center;color:var(--muted)}
+.dong-link{margin-top:40px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:var(--soft);border-radius:var(--radius);padding:20px 24px}
+.dong-link b{color:var(--main-d);font-size:17px}
+.dong-link a{background:var(--main);color:#fff;border-radius:999px;padding:10px 20px;font-weight:700;font-size:15px}
+
+footer{background:#151A33;color:#B6BBD1;padding:36px 0;font-size:14px}
+footer b{color:#fff}
+.ph{background:rgba(242,163,58,.25);border-radius:3px;padding:0 4px;color:#fff}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="./" class="logo"><span class="mark">중구</span><span>대구중구지역사회보장협의체<small>DAEGU JUNG-GU SOCIAL SECURITY COUNCIL</small></span></a>
+    <nav class="menu" id="menu">
+      <a href="index.html#about">협의체 소개</a>
+      <a href="bunkwa.html">실무분과</a>
+      <a href="dong.html">동 협의체</a>
+      <a href="jawon.html" class="on">복지자원</a>
+      <a href="index.html#biz">주요사업</a>
+      <a href="index.html#news">소식·공지</a>
+      <a href="gyehoek.html">자료실</a>
+      <a href="index.html#contact">참여·문의</a>
+    </nav>
+    <button class="burger" aria-label="메뉴 열기" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<div class="sub-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="./">홈</a> › 복지자원 현황</div>
+    <h1>중구 복지자원 현황</h1>
+    <p id="hero-count">중구 안의 복지기관을 분야별로 찾아보세요</p>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="tools">
+    <label class="search" for="q">
+      <span aria-hidden="true">🔍</span>
+      <input id="q" type="search" placeholder="기관명이나 주소로 찾기 (예: 지역아동센터, 남산동)" autocomplete="off">
+    </label>
+    <div class="chips" id="chips" role="group" aria-label="분야 선택"></div>
+  </div>
+
+  <p class="note"><b>안내</b><span>주소와 전화번호는 기관 사정으로 바뀌었을 수 있어요. 방문 전에 전화로 먼저 확인해 주세요. <strong>최신 확인</strong> 표시는 2026년에 다시 확인한 기관입니다.</span></p>
+
+  <div id="list" aria-live="polite"></div>
+
+  <div class="dong-link">
+    <div><b>우리 동 복지팀에 바로 연락하기</b><br><span style="font-size:14px;color:var(--muted)">12개 동 행정복지센터 복지팀 연락처는 동 협의체 페이지에서 볼 수 있어요.</span></div>
+    <a href="dong.html">동 협의체 바로가기</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><b>대구중구지역사회보장협의체 사무국</b> · 대구광역시 중구 국채보상로139길 1, 4층 · 전화 053-661-2288 · actor0204@korea.kr · © 2026</div>
+</footer>
+
+<script>
+// ▼ 복지자원 데이터 [분야, 기관명, 주소, 전화, 최신확인여부]
+// 원본: 구글시트 「중구 복지자원 현황」 / 출처: 동 협의체 위원 활동도움서 부록(2020년 기준), 2026년 웹 확인 일부
+const DATA = [
+ ["종합사회복지","남산기독교종합사회복지관","대구 중구 관덕정길 16 (남산동)","053-257-1244",1],
+ ["종합사회복지","남산종합사회복지관","대구 중구 남산로7길 80 (남산동) 까치아파트 내","053-254-2562",0],
+ ["노인","중구노인복지관","대구 중구 태평로 45 (태평로3가) 4~6층","053-257-2577",0],
+ ["노인","에덴양로원","대구 중구 경상감영길 298-48 (동인동2가)","053-423-5050",0],
+ ["노인","삼덕노인복지센터","대구 중구 공평로 22, 8층","053-423-3279",0],
+ ["노인","어르신마을노인복지센터","대구 중구 명륜로26길 77-2 (대봉동)","053-424-0881",0],
+ ["노인","대구중구시니어클럽","대구 중구 공평로4길 24-7 (삼덕동2가)","053-422-1901",0],
+ ["노인","삼덕기억학교","대구 중구 공평로 22 (삼덕동) 삼덕교회 60주년 기념관 8층","053-268-3271",0],
+ ["노인","중구보건소 치매안심센터","대구 중구 태평로 45, 중구보건소 3층","053-661-3911",0],
+ ["노인","대구중구노인상담소","대구 중구 태평로 45, 중구보건소 4층","053-252-8421",0],
+ ["장애인","대구광역시발달장애인지원센터","대구 중구 국채보상로 648 호수빌딩 8층","053-719-0340",0],
+ ["장애인","대구장애인편의증진기술지원센터","대구 중구 동덕로 61 (대봉동) 선모빌딩 4층","053-944-0370",0],
+ ["장애인","대구광역시편의시설설치시민촉진단","대구 중구 동덕로 61 (대봉동) 선모빌딩 4층","053-944-0170",0],
+ ["장애인","남산보호작업장","대구 중구 태평로 131, 4층","053-254-4902",0],
+ ["장애인","다사랑보호작업장","대구 중구 남성로 7-1","053-255-0322",0],
+ ["장애인","마중물일터","대구 중구 명륜로11길 41","053-428-7970",0],
+ ["장애인","행복의일터","대구 중구 달성공원로4길 30","053-554-2046",0],
+ ["장애인","마중물 그룹홈","대구 중구 명륜로24길 9 (남산동) 3층","053-425-7975",0],
+ ["장애인","미문의집","대구 중구 명륜로11길 41, 2층","053-255-7970",0],
+ ["아동·청소년","동인지역아동센터","대구 중구 국채보상로143길 72 (동인동3가) 1층","053-253-3940",1],
+ ["아동·청소년","대구삼육지역아동센터","대구 중구 국채보상로 688-11 (동인동2가) 1층","053-253-2799",1],
+ ["아동·청소년","남문행복한홈스쿨지역아동센터","대구 중구 2·28길 32-19 (남산1동) 1층","053-425-9511",1],
+ ["아동·청소년","구세군대구지역아동센터","대구 중구 경상감영길 39, 2층","053-255-6195",1],
+ ["아동·청소년","지역아동센터오뚝이교실","대구 중구 관덕정길 16, 남산기독교복지관 3층","053-257-1288",1],
+ ["아동·청소년","대구광역시아동보호전문기관","대구 중구 태평로 302 (동인동3가)","053-422-1391",0],
+ ["아동·청소년","삼덕SOS자립생활관","대구 중구 공평로4길 10 (삼덕동2가)","053-427-9659",0],
+ ["아동·청소년","자립통합지원센터","대구 중구 국채보상로 655, 화성파크드림 619호","053-243-0070",0],
+ ["아동·청소년","한몸그룹홈","대구 중구 국채보상로149길 8, 아펠바움 501호","053-423-8538",0],
+ ["아동·청소년","남산교회어린이집","대구 중구 관덕정길 16 (남산동)","053-253-0130",0],
+ ["아동·청소년","백합어린이집","대구 중구 남산로4길 111 (남산동)","053-256-6862",0],
+ ["아동·청소년","중구청소년상담복지센터","대구 중구 국채보상로 541, 8층","053-423-1388",0],
+ ["아동·청소년","중구청소년지원센터 꿈드림","대구 중구 국채보상로 541, 8층","053-422-2121",0],
+ ["아동·청소년","대구청소년활동진흥센터","대구 중구 중앙대로81길 66-5 (종로1가)","053-659-6210",0],
+ ["아동·청소년","대구청소년지원재단","대구 중구 중앙대로81길 66-5 (종로1가)","053-659-6200",0],
+ ["아동·청소년","대구광역시남자중장기청소년쉼터","대구 중구 남산로8길 14 (남산동) 3층","053-426-2275",0],
+ ["가족·여성","대구중구 가족센터","대구 중구 남산로 53-1 (남산동) 2~3층","053-431-1230",1],
+ ["가족·여성","대구중앙가족상담센터","대구 중구 국채보상로 522 센트럴시티오피스텔 1817호","053-962-1318",0],
+ ["가족·여성","이주노동자상담 다문화가정","대구 중구 중앙대로77길 40 (종로2가) 1층","053-253-1313",0],
+ ["정신건강","중구 정신건강복지센터","주소는 전화로 확인해 주세요","053-256-2900",1],
+ ["정신건강","해인정신건강상담센터","대구 중구 명덕로 261 (대봉동) 회당빌딩 2층","053-425-0425",0],
+ ["자활·일자리","대구중구지역자활센터","대구 중구 남산로7길 75 (남산동) 까치아파트 상가 104동 지하 1호","053-256-3083",0],
+ ["자활·일자리","가톨릭근로자회관","대구 중구 중앙대로77길 40 (종로2가) 1층","053-253-1313",0],
+ ["자활·일자리","대구하나센터","대구 중구 국채보상로 554-1, 2층","053-356-0463",0],
+ ["자원봉사·나눔","중구자원봉사센터","대구 중구 국채보상로 732, 보훈회관 4~5층","053-254-6367",0],
+ ["자원봉사·나눔","중구기초푸드뱅크","대구 중구 남산로1길 78","053-254-1388",0],
+ ["자원봉사·나눔","중구만나푸드마켓","대구 중구 경상감영길 302 인화빌딩 1층","053-257-1377",0],
+ ["자원봉사·나눔","행복한 중구푸드마켓","대구 중구 명륜로24길 9 (남산동) 3층","053-425-7975",0],
+ ["자원봉사·나눔","(사)대구곰두리봉사회","대구 중구 명륜로11길 41, 2층","053-255-7970",0],
+ ["자원봉사·나눔","카리타스복지교육센터","대구 중구 동덕로 61 (대봉동) 선모빌딩 4층","053-944-0370",0],
+ ["자원봉사·나눔","(재)한국의학연구소 대구센터","대구 중구 국채보상로 648 호수빌딩 8층","053-719-0340",0],
+ ["보건·의료","경북대학교병원 사회사업상담실","대구 중구 동덕로 130 (삼덕동2가)","053-200-5217",0],
+ ["보건·의료","계명대학교 동산의료원 사회사업팀","대구 중구 달성로 56 (동산동)","053-250-7281",0],
+ ["노숙인","행복나눔의집","대구 중구 서성로16길 53","053-719-3497",0],
+ ["공공기관","중구청 생활지원과 (희망복지지원)","대구 중구 국채보상로139길 1","053-661-2283",0],
+ ["공공기관","중구청 복지정책과 (복지기획)","대구 중구 국채보상로139길 1","053-661-2514",0]
+];
+
+const CATS = [...new Set(DATA.map(d => d[0]))];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let cat = "전체", q = "";
+
+document.getElementById("hero-count").textContent =
+  `중구 안의 복지기관 ${DATA.length}곳을 ${CATS.length}개 분야로 나눠 소개합니다`;
+
+function chips(){
+  const all = [["전체", DATA.length], ...CATS.map(c => [c, DATA.filter(d => d[0] === c).length])];
+  document.getElementById("chips").innerHTML = all.map(([c, n]) =>
+    `<button type="button" class="chip" data-c="${esc(c)}" aria-pressed="${c === cat}">${esc(c)}<b>${n}</b></button>`).join("");
+}
+
+function render(){
+  const k = q.trim().toLowerCase();
+  const rows = DATA.filter(d => (cat === "전체" || d[0] === cat) && (!k || (d[1] + " " + d[2] + " " + d[0]).toLowerCase().includes(k)));
+  const groups = CATS.filter(c => rows.some(r => r[0] === c));
+  document.getElementById("list").innerHTML = rows.length ? groups.map(c => {
+    const items = rows.filter(r => r[0] === c);
+    return `<section class="group"><h2>${esc(c)}<span>${items.length}곳</span></h2><div class="grid">${items.map(r =>
+      `<article class="item"><div class="nm">${esc(r[1])}${r[4] ? '<span class="ok">최신 확인</span>' : ""}</div>
+        <div class="ad">${esc(r[2])}</div>
+        <a class="tel" href="tel:${esc(r[3])}">☎ ${esc(r[3])}</a></article>`).join("")}</div></section>`;
+  }).join("") : `<p class="empty">‘${esc(q)}’에 맞는 기관이 없어요. 다른 이름이나 동 이름으로 찾아보세요.</p>`;
+}
+
+document.getElementById("chips").addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if (!b) return;
+  cat = b.dataset.c; chips(); render();
+});
+document.getElementById("q").addEventListener("input", e => { q = e.target.value; render(); });
+chips(); render();
+</script>
+</body>
+</html>

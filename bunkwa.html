@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>실무분과 | 대구중구지역사회보장협의체</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --main:#3346A8; --main-d:#22307A; --main-l:#EEF0FA;
+  --sky:#29A8E0; --accent:#F2A33A; --ink:#1C2033; --muted:#5B6075; --line:#DFE2EE;
+  --bg:#ffffff; --soft:#F5F6FB; --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;word-break:keep-all;font-size:16px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.draft{background:var(--accent);color:#3a2500;text-align:center;font-size:13px;padding:6px 16px;font-weight:500}
+.ph{background:rgba(242,163,58,.22);border-radius:3px;padding:0 4px}
+
+/* 헤더 (메인과 동일) */
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:20}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:17px;color:var(--main-d)}
+.logo .mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--main),var(--sky));display:grid;place-items:center;color:#fff;font-size:13px;font-weight:700}
+.logo small{display:block;font-size:10.5px;font-weight:500;color:var(--muted);letter-spacing:.03em}
+.menu{display:flex;gap:20px;font-weight:500;font-size:15px}
+.menu a:hover,.menu a.on{color:var(--main)}
+.menu a.on{font-weight:700}
+.burger{display:none;background:none;border:0;font-size:26px;cursor:pointer;color:var(--main-d)}
+@media(max-width:1020px){
+  .menu{display:none;position:absolute;top:70px;left:0;right:0;background:#fff;flex-direction:column;gap:0;border-bottom:1px solid var(--line)}
+  .menu.open{display:flex}
+  .menu a{padding:14px 16px;border-top:1px solid var(--line)}
+  .burger{display:block}
+}
+
+/* 서브 히어로 */
+.sub-hero{background:linear-gradient(120deg,var(--main-d),var(--main));color:#fff;padding:40px 0 44px}
+.crumb{font-size:13px;opacity:.8;margin-bottom:8px}
+.crumb a:hover{text-decoration:underline}
+.sub-hero h1{font-size:clamp(26px,4vw,34px);font-weight:900}
+.sub-hero p{opacity:.88;margin-top:6px;font-size:15px}
+
+/* 레이아웃 */
+.layout{display:grid;grid-template-columns:230px 1fr;gap:36px;padding:40px 16px 72px}
+.layout>*{min-width:0}
+.side{position:sticky;top:94px;align-self:start}
+.side h2{font-size:14px;color:var(--muted);font-weight:700;margin-bottom:10px;letter-spacing:.04em}
+.side ul{list-style:none;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.side li a{display:flex;gap:10px;align-items:center;padding:12px 16px;font-size:15px;border-top:1px solid var(--line)}
+.side li:first-child a{border-top:0}
+.side li a span{font-size:12px;color:var(--sky);font-weight:700;width:18px}
+.side li a:hover{background:var(--soft)}
+.side li a.on{background:var(--main);color:#fff;font-weight:700}
+.side li a.on span{color:#fff}
+@media(max-width:860px){
+  .layout{grid-template-columns:1fr;gap:20px;padding-top:20px}
+  .side{position:static}
+  .side h2{display:none}
+  .side ul{display:flex;overflow-x:auto;border:0;border-radius:0;gap:8px;padding-bottom:6px;scrollbar-width:none}
+  .side li a{border:1px solid var(--line);border-radius:999px;padding:8px 14px;white-space:nowrap;font-size:14px}
+  .side li:first-child a{border-top:1px solid var(--line)}
+  .side li a span{display:none}
+}
+
+/* 본문 */
+.head .no{font-size:13px;font-weight:700;color:var(--sky);letter-spacing:.08em}
+.head h2{font-size:30px;font-weight:900;color:var(--main-d);line-height:1.3}
+.head .slogan{font-size:18px;margin-top:6px;color:var(--ink);font-weight:500}
+.head .desc{color:var(--muted);margin-top:10px;font-size:15px}
+
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:24px 0 36px}
+.fact{background:var(--soft);border-radius:12px;padding:16px 18px}
+.fact small{display:block;font-size:12.5px;color:var(--muted);font-weight:500}
+.fact b{font-size:16px;color:var(--main-d)}
+@media(max-width:600px){.facts{grid-template-columns:1fr}}
+
+h3.st{font-size:19px;font-weight:900;color:var(--main-d);margin:0 0 14px;display:flex;align-items:center;gap:8px}
+h3.st::before{content:"";width:4px;height:18px;background:var(--accent);border-radius:2px}
+.block{margin-bottom:40px}
+
+/* 사업 표 */
+.tbl{width:100%;border-collapse:collapse;font-size:15px;border-top:2px solid var(--main-d)}
+.tbl th{background:var(--soft);font-weight:700;color:var(--main-d);padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);font-size:14px}
+.tbl td{padding:14px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl td.name{font-weight:700;width:26%}
+.tbl td.when{width:16%;white-space:nowrap}
+.tbl td.when em{font-style:normal;display:inline-block;background:var(--main-l);color:var(--main);font-size:13px;font-weight:700;border-radius:6px;padding:2px 8px}
+.tbl tr.spec td.name{color:var(--main)}
+.tbl tr.spec td.name::after{content:"특화";font-size:11px;background:var(--accent);color:#3a2500;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:2px}
+.tbl ul{list-style:none}
+.tbl li{position:relative;padding-left:12px}
+.tbl li::before{content:"";position:absolute;left:0;top:11px;width:4px;height:4px;border-radius:50%;background:var(--muted)}
+@media(max-width:600px){
+  .tbl thead{display:none}
+  .tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%!important}
+  .tbl tr{border-bottom:1px solid var(--line);padding:12px 0}
+  .tbl td{border:0;padding:2px 0}
+  .tbl td.when{margin:2px 0 6px}
+}
+
+/* 연간 흐름 */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.flow div{border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-height:96px}
+.flow small{font-size:12.5px;font-weight:700;color:var(--sky)}
+.flow p{font-size:14.5px;margin-top:4px}
+@media(max-width:700px){.flow{grid-template-columns:repeat(2,1fr)}}
+
+/* 사진 */
+.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.photos div{aspect-ratio:4/3;border-radius:12px;background:repeating-linear-gradient(45deg,var(--soft) 0 10px,#EBEDF6 10px 20px);display:grid;place-items:center;color:var(--muted);font-size:13px;text-align:center;padding:8px}
+@media(max-width:600px){.photos{grid-template-columns:repeat(2,1fr)}}
+
+.common{background:var(--main-l);border-radius:var(--radius);padding:18px 22px;font-size:15px;color:var(--main-d)}
+.common ul{list-style:none;margin-top:6px}
+.common li{padding-left:14px;position:relative;margin-top:2px}
+.common li::before{content:"·";position:absolute;left:2px;font-weight:900}
+
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
+.pager a{display:flex;flex-direction:column;font-size:13px;color:var(--muted);max-width:48%}
+.pager a b{font-size:16px;color:var(--main-d)}
+.pager a.next{text-align:right;margin-left:auto}
+
+footer{background:#151A33;color:#B6BBD1;padding:36px 0;font-size:14px}
+footer b{color:#fff}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="./" class="logo"><span class="mark">중구</span><span>대구중구지역사회보장협의체<small>DAEGU JUNG-GU SOCIAL SECURITY COUNCIL</small></span></a>
+    <nav class="menu" id="menu">
+      <a href="index.html#about">협의체 소개</a>
+      <a href="bunkwa.html" class="on">실무분과</a>
+      <a href="dong.html">동 협의체</a>
+      <a href="jawon.html">복지자원</a>
+      <a href="index.html#biz">주요사업</a>
+      <a href="index.html#news">소식·공지</a>
+      <a href="gyehoek.html">자료실</a>
+      <a href="index.html#contact">참여·문의</a>
+    </nav>
+    <button class="burger" aria-label="메뉴 열기" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<div class="sub-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="./">홈</a> › 실무분과 › <span id="crumb-name"></span></div>
+    <h1>실무분과</h1>
+    <p>기관·법인·단체·시설 간 연계와 협력, 지역사회보장계획 모니터링, 특성화 사업을 추진하는 9개 분과, 위원 93명</p>
+  </div>
+</div>
+
+<div class="wrap layout">
+  <aside class="side">
+    <h2>9개 분과</h2>
+    <ul id="side"></ul>
+  </aside>
+
+  <main id="content" aria-live="polite"></main>
+</div>
+
+<footer>
+  <div class="wrap"><b>대구중구지역사회보장협의체 사무국</b> · 대구광역시 중구 국채보상로139길 1, 4층 · 전화 053-661-2288 · actor0204@korea.kr · © 2026</div>
+</footer>
+
+<script>
+// ▼ 분과 데이터: 새 분과나 내용 변경은 여기만 고치면 됩니다.
+// 출처: 2026년 중구지역사회보장협의체 구성 및 기능 안내자료
+const COMMON = "협의체사업 지원";
+const SUPPORT = { name: COMMON, when: "수시", items: ["대구지역 역량강화 컨퍼런스, 민관협력워크숍, 중구복지박람회 참여", "따뜻한 중구만들기(저소득가정 온정나눔)", "나눔기부 감사의 날 참여"] };
+const UNION = { name: "실무분과 연합회의", when: "12월 중", items: ["분과별 연간 성과 및 차년도 계획 발표", "협의체 운영 활성화 논의", "실무분과위원 친목"] };
+
+const DATA = [
+  { id: "plan", name: "복지기획분과", slogan: "협의체 운영의 중심, 분과 간 협력을 기획합니다",
+    desc: "협의체 공동사업을 기획·지원하고, 실무분과위원에게 필요한 역량강화 교육과 선진지 견학을 운영합니다.",
+    meeting: "격월 둘째 주 수요일경", count: "연 5~6회",
+    biz: [
+      { name: "정기회의", when: "격월 1회", items: ["소속기관 순번제로 회의장소 제공", "기관동향 공유 및 안건사항 토의"] },
+      SUPPORT,
+      { name: "실무분과위원 역량강화 교육", when: "상반기", spec: true, items: ["자살예방교육, 지진피해 대처교육 등 실무에 필요한 교육", "중구정신건강복지센터 연계"] },
+      { name: "선진지 견학", when: "하반기", items: ["벤치마킹 기관 섭외 및 방문", "회원 간 네트워크 강화"] },
+      UNION ] },
+  { id: "village", name: "복지마을분과", slogan: "12개 동 협의체와 함께 마을복지를 키웁니다",
+    desc: "동 협의체 위원장 네트워크로 구성되어, 동 협의체 위원 교육·컨설팅과 연말 성과보고회를 맡습니다.",
+    meeting: "격월 둘째 주 수요일", count: "연 6~8회",
+    biz: [
+      { name: "정기회의", when: "격월 1회", items: ["동 협의체 위원장 네트워크 형성"] },
+      SUPPORT,
+      { name: "실무분과위원 역량강화 교육", when: "상반기", items: ["동 협의체 위원 역량강화를 위한 교육", "교육주제 선정 논의"] },
+      { name: "동 지역사회보장협의체 컨설팅", when: "상반기", spec: true, items: ["동 협의체 위원 욕구조사", "운영에 관한 자체평가"] },
+      { name: "동 지역사회보장협의체 성과보고회", when: "12월 중", spec: true, items: ["12개 동 협의체 성과 보고", "협의체 위원 인정·보상(포상)", "우수사례 발표"] } ] },
+  { id: "job", name: "일자리분과", slogan: "일하며 자립하는 삶을 지원합니다",
+    desc: "주거·자활·일자리·고용 분야 기관이 함께 정보를 나누고, 관련 기관 견학으로 네트워크를 넓힙니다.",
+    meeting: "격월 둘째 주 수요일경", count: "연 6회",
+    biz: [
+      { name: "정기회의", when: "격월 1회", items: ["소속기관 순번제로 회의장소 제공", "기관동향 공유"] },
+      SUPPORT,
+      { name: "실무분과위원 역량강화 교육", when: "하반기", spec: true, items: ["주제: 주거 & 자활 & 일자리"] },
+      { name: "선진지 견학", when: "연 1회", items: ["주거·자활·일자리·고용 관련 기관 섭외 및 방문", "회원 간 네트워크 강화"] },
+      UNION ] },
+  { id: "senior", name: "노인분과", slogan: "어르신의 안녕을 마을이 함께 살핍니다",
+    desc: "취약 경로당을 선정해 분과 기관이 서비스를 지원하고, 동 협의체와 함께 매일문안 어르신에게 지역 자원을 연결합니다.",
+    meeting: "격월", count: "연 6회 내외",
+    biz: [
+      { name: "정기회의", when: "격월 1회", items: ["경로당 활성화사업 대상 선정", "월별 서비스 지원현황 확인"] },
+      { name: "경로당 활성화 지원사업", when: "주 1회~월 1회", spec: true, items: ["지원이 더 필요한 경로당 1곳 선정", "분과위원 소속기관에서 서비스 지원"] },
+      { name: "좋은돌봄 ‘마음과 마을을 잇다’", when: "월 1회", spec: true, items: ["동 협의체 위원과 협업", "매일문안제 어르신 대상 지역복지자원 공유"] },
+      SUPPORT,
+      { name: "분과 선진지 견학", when: "연 1회", items: ["노인복지 사업 선진지 견학 및 벤치마킹"] },
+      UNION ] },
+  { id: "disability", name: "장애인분과", slogan: "장애에 대한 인식을 바꾸고 함께 어울립니다",
+    desc: "중구 지역 장애인 실태를 조사하는 연구사업과, 장애인 생산품을 알리는 어울림장터를 운영합니다.",
+    meeting: "격월 셋째 주 수요일경", count: "연 5~6회",
+    biz: [
+      { name: "정기회의", when: "격월 1회", items: ["소속기관 순번제로 회의장소 제공", "기관동향 공유 및 안건사항 토의"] },
+      { name: "장애인분과 연구사업", when: "연 1회", spec: true, items: ["중구 지역 발달장애인 실태조사", "관내 사회복지시설 이용 장애인 현황조사"] },
+      SUPPORT,
+      { name: "장애인식개선 어울림장터", when: "연 1회", spec: true, items: ["장애인식개선 캠페인", "장애인 생산품 판매 및 홍보"] },
+      UNION ] },
+  { id: "family", name: "여성가족분과", slogan: "건강한 가족, 든든한 지역을 만듭니다",
+    desc: "가족상담·가족치료 역량강화 교육과 여성가족 분야 선진지 견학으로 위원 간 협력을 다집니다.",
+    meeting: "격월 넷째 주 화요일경", count: "연 5~6회",
+    biz: [
+      { name: "정기회의", when: "격월 1회", items: ["소속기관 순번제로 회의장소 제공", "기관동향 공유 및 안건사항 토의"] },
+      SUPPORT,
+      { name: "실무분과위원 역량강화 교육", when: "상반기", spec: true, items: ["주제: 가족상담 및 가족치료"] },
+      { name: "선진지 견학", when: "하반기", items: ["여성가족 분야 벤치마킹 기관 섭외 및 방문", "회원 간 네트워크 강화"] },
+      UNION ] },
+  { id: "child", name: "아동청소년분과", slogan: "아이들이 안전하게 자라는 중구를 만듭니다",
+    desc: "아동학대 예방과 아동심리 교육, 아동청소년 분야 기관 벤치마킹을 함께합니다.",
+    meeting: "격월 넷째 주 화요일경", count: "연 5~6회",
+    biz: [
+      { name: "정기회의", when: "격월 1회", items: ["소속기관 순번제로 회의장소 제공", "기관동향 공유 및 안건사항 토의"] },
+      SUPPORT,
+      { name: "실무분과위원 역량강화 교육", when: "상반기", spec: true, items: ["주제: 아동학대 예방교육 및 아동심리 교육"] },
+      { name: "선진지 견학", when: "하반기", items: ["아동청소년 분야 벤치마킹 기관 섭외 및 방문", "회원 간 네트워크 강화"] },
+      UNION ] },
+  { id: "suicide", name: "자살예방분과", slogan: "생명을 지키는 지역 안전망을 만듭니다",
+    desc: "자살예방 교육과 홍보, 관련 기관 견학으로 생명존중 안전망을 위한 기관 간 협력을 강화합니다.",
+    meeting: "격월 넷째 주 목요일경", count: "연 6회",
+    biz: [
+      { name: "정기회의", when: "격월 1회", items: ["위원 소속기관 순번제로 회의장소 제공", "기관동향 공유 및 복지현안 논의"] },
+      SUPPORT,
+      { name: "실무분과위원 역량강화 교육", when: "하반기", spec: true, items: ["주제: 자살예방교육 및 홍보"] },
+      { name: "선진지 견학", when: "연 1회", items: ["협의체 활동 관련 기관 방문 벤치마킹", "회원 간 네트워크 강화"] },
+      UNION ] },
+  { id: "isolation", name: "사회적고립예방분과", slogan: "혼자가 아닌, 연결된 이웃을 만듭니다",
+    desc: "사회적 고립 예방 역량을 키우고, 고립·고독사 위험 이웃을 발굴하기 위해 기관 간 협력합니다.",
+    meeting: "격월 둘째 주 수요일경", count: "연 6회",
+    biz: [
+      { name: "정기회의", when: "격월 1회", items: ["소속기관 순번제로 회의장소 제공", "기관동향 공유"] },
+      SUPPORT,
+      { name: "실무분과위원 역량강화 교육", when: "하반기", spec: true, items: ["주제: 사회적 고립 예방 역량강화 교육"] },
+      UNION ] }
+];
+
+// 시기 → 연간 흐름 칸
+function season(w){
+  if (w.includes("상반기")) return 0;
+  if (w.includes("하반기")) return 2;
+  if (w.includes("12월")) return 3;
+  return -1; // 연중
+}
+
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function render(id){
+  const i = Math.max(0, DATA.findIndex(d => d.id === id));
+  const d = DATA[i];
+  document.title = `${d.name} | 대구중구지역사회보장협의체`;
+  document.getElementById("crumb-name").textContent = d.name;
+
+  document.getElementById("side").innerHTML = DATA.map((x, n) =>
+    `<li><a href="#${x.id}" class="${x.id === d.id ? "on" : ""}"><span>${String(n + 1).padStart(2, "0")}</span>${esc(x.name)}</a></li>`).join("");
+
+  const rows = d.biz.map(b => `<tr class="${b.spec ? "spec" : ""}"><td class="name">${esc(b.name)}</td><td class="when"><em>${esc(b.when)}</em></td><td><ul>${b.items.map(t => `<li>${esc(t)}</li>`).join("")}</ul></td></tr>`).join("");
+
+  const cols = [[], [], [], []];
+  d.biz.forEach(b => { const s = season(b.when); if (s >= 0) cols[s].push(b.name); });
+  const yearRound = d.biz.filter(b => season(b.when) < 0).map(b => b.name);
+  cols[1] = yearRound;
+  const labels = ["상반기", "연중", "하반기", "12월"];
+  const flow = labels.map((l, n) => `<div><small>${l}</small><p>${cols[n].length ? cols[n].map(esc).join("<br>") : "–"}</p></div>`).join("");
+
+  const prev = DATA[(i + DATA.length - 1) % DATA.length], next = DATA[(i + 1) % DATA.length];
+
+  document.getElementById("content").innerHTML = `
+    <div class="head">
+      <div class="no">COMMITTEE ${String(i + 1).padStart(2, "0")}</div>
+      <h2>${esc(d.name)}</h2>
+      <p class="slogan">${esc(d.slogan)}</p>
+      <p class="desc">${esc(d.desc)}</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><small>정기회의</small><b>${esc(d.meeting)}</b></div>
+      <div class="fact"><small>연간 회의</small><b>${esc(d.count)}</b></div>
+    </div>
+    <section class="block">
+      <h3 class="st">2026년 주요사업</h3>
+      <table class="tbl"><thead><tr><th>사업명</th><th>시기</th><th>세부내용</th></tr></thead><tbody>${rows}</tbody></table>
+    </section>
+    <section class="block">
+      <h3 class="st">한 해 흐름</h3>
+      <div class="flow">${flow}</div>
+    </section>
+    <div class="common"><b>모든 분과 공통 활동</b>
+      <ul><li>격월 정기회의: 기관 동향 공유와 지역 복지현안 논의 (소속기관 순번제로 회의장소 제공)</li>
+      <li>협의체 사업 참여: 따뜻한 중구만들기, 중구복지박람회, 민관협력워크숍, 대구지역 역량강화 컨퍼런스, 나눔기부 감사의 날</li>
+      <li>12월 실무분과 연합회의: 분과별 연간 성과와 차년도 계획 발표</li></ul>
+    </div>
+    <nav class="pager" aria-label="이전·다음 분과">
+      <a href="#${prev.id}">← 이전 분과<b>${esc(prev.name)}</b></a>
+      <a class="next" href="#${next.id}">다음 분과 →<b>${esc(next.name)}</b></a>
+    </nav>`;
+  const on = document.querySelector(".side a.on");
+  if (on) on.scrollIntoView({block: "nearest", inline: "center"});
+}
+
+window.addEventListener("hashchange", () => { render(location.hash.slice(1)); window.scrollTo({top: 0}); });
+render(location.hash.slice(1));
+</script>
+</body>
+</html>
