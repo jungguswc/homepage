@@ -87,6 +87,50 @@ section{padding:68px 0}
 @media(max-width:860px){.about{grid-template-columns:1fr}}
 @media(max-width:480px){.org{grid-template-columns:repeat(2,1fr)}}
 
+/* 조직도 */
+.oc-wrap{margin-top:44px;background:var(--soft);border-radius:20px;padding:28px 28px 24px}
+.oc-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.oc-head h3{font-size:20px;font-weight:900;color:var(--main-d)}
+.oc-head p{font-size:13.5px;color:var(--muted)}
+.oc-head .gi{display:flex;gap:8px}
+.oc-head .gi span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:700;color:var(--main-d)}
+.oc-head .gi b{color:var(--accent)}
+.oc{display:grid;grid-template-columns:1fr 1.3fr 1fr;column-gap:36px;row-gap:26px;align-items:center;position:relative}
+.ob{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;text-align:center;position:relative;z-index:1}
+.ob b{display:block;font-size:15.5px;color:var(--main-d)}
+.ob span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.ob.main{background:var(--main-d);border-color:var(--main-d)}
+.ob.main b{color:#fff;font-size:17px}
+.ob.main span{color:rgba(255,255,255,.8)}
+.ob.main em{font-style:normal;display:inline-block;margin-top:6px;background:var(--accent);color:#3a2500;border-radius:999px;padding:1px 10px;font-size:12.5px;font-weight:900}
+.ob.side::after{content:"";position:absolute;top:50%;width:36px;border-top:2px solid #B9C0DE}
+.ob.l::after{left:100%}
+.ob.r::after{right:100%}
+.ob.dash{border-style:dashed}
+.ob.dash::after{border-top-style:dashed}
+.c2{grid-column:2}
+.ob.main.down::before{content:"";position:absolute;left:50%;top:100%;height:26px;border-left:2px solid #B9C0DE}
+.bunkwa-row{grid-column:1/-1;display:grid;grid-template-columns:repeat(9,1fr);gap:8px;position:relative;padding-top:18px}
+.bunkwa-row::before{content:"";position:absolute;top:0;left:5.5%;right:5.5%;border-top:2px solid #B9C0DE}
+.bunkwa-row a{display:flex;align-items:center;justify-content:center;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 4px;text-align:center;font-size:13.5px;font-weight:700;color:var(--main-d);position:relative;line-height:1.35}
+.bunkwa-row a::before{content:"";position:absolute;left:50%;bottom:100%;height:18px;border-left:2px solid #B9C0DE}
+.bunkwa-row a:hover{border-color:var(--main);color:var(--main)}
+.bunkwa-row a.net{border-color:var(--accent)}
+.oc-note{margin-top:14px;font-size:13px;color:var(--muted)}
+.oc-note b{color:var(--accent)}
+@media(max-width:860px){
+  .oc-wrap{padding:22px 16px}
+  .oc{grid-template-columns:1fr;row-gap:10px}
+  .c2{grid-column:1}
+  .ob.side::after,.ob.main.down::before,.bunkwa-row::before,.bunkwa-row a::before{display:none}
+  .ob{text-align:left;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .ob span{margin:0;text-align:right}
+  .ob.main{display:block}
+  .ob.main span{text-align:left;margin-top:2px}
+  .ob.side{margin-left:18px}
+  .bunkwa-row{grid-template-columns:repeat(3,1fr);padding-top:4px}
+}
+
 /* 공지/소식 */
 .board{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .list{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:8px 22px}
@@ -212,6 +256,39 @@ footer .ph{background:rgba(242,163,58,.25);color:#fff}
         <div><b>93</b><span>실무분과</span></div>
         <div><b>204</b><span>동 협의체</span></div>
       </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="oc-wrap" role="img" aria-label="협의체 조직도: 공동위원장이 이끄는 대표협의체, 실무협의체위원장이 이끄는 실무협의체, 그 아래 9개 실무분과, 12개 동 협의체와 사무국">
+      <div class="oc-head">
+        <div><h3>협의체 조직도</h3><p>위원 359명이 대표협의체·실무협의체·실무분과·동 협의체에서 함께 활동합니다</p></div>
+        <div class="gi"><span>구 협의체 <b>11기</b></span><span>동 협의체 <b>5기</b></span></div>
+      </div>
+      <div class="oc">
+        <div class="ob side l"><b>공동위원장</b><span>류규하 · 윤보경</span></div>
+        <div class="ob main down"><b>대표협의체</b><span>지역사회보장 심의·자문</span><em>26명</em></div>
+        <div class="ob side r dash"><b>전문위원회</b><span>특화사업 심사 등</span></div>
+
+        <div class="ob side l"><b>실무협의체위원장</b><span>실무 총괄</span></div>
+        <div class="ob main down"><b>실무협의체</b><span>안건 사전검토·분과 조정</span><em>36명</em></div>
+        <div class="ob side r"><b>사무국</b><span>사무국장 · 운영 지원</span></div>
+
+        <div class="ob main c2"><b>실무분과</b><span>기관 간 연계·협력, 계획 모니터링</span><em>93명</em></div>
+        <div class="ob side r dash"><b>동 협의체</b><span>12개 동 · 204명</span></div>
+
+        <div class="bunkwa-row">
+          <a href="bunkwa.html#plan">복지기획</a>
+          <a href="bunkwa.html#village" class="net">복지마을</a>
+          <a href="bunkwa.html#isolation">사회적<br>고립예방</a>
+          <a href="bunkwa.html#suicide">자살예방</a>
+          <a href="bunkwa.html#child">아동<br>청소년</a>
+          <a href="bunkwa.html#family">여성가족</a>
+          <a href="bunkwa.html#senior">노인</a>
+          <a href="bunkwa.html#disability">장애인</a>
+          <a href="bunkwa.html#job">일자리</a>
+        </div>
+      </div>
+      <p class="oc-note"><b>복지마을분과</b>는 12개 동 협의체 위원장 네트워크로 구성되어 구 협의체와 동 협의체를 잇습니다. 분과 이름을 누르면 상세 페이지로 이동합니다.</p>
     </div>
   </div>
 </section>
