@@ -236,7 +236,7 @@ footer .ph{background:rgba(242,163,58,.25);color:#fff}
   <div class="grid">
     <a href="#dong"><span class="ico">🤝</span><b>이웃 돌봄 연결</b><span>도움이 필요한 이웃, 동 복지팀으로</span></a>
     <a href="gyehoek.html"><span class="ico">📘</span><b>지역사회보장계획</b><span>제5기·제6기 자료실</span></a>
-    <a href="#news"><span class="ico">📢</span><b>공지사항</b><span>회의·교육·모집 안내</span></a>
+    <a href="notice.html"><span class="ico">📢</span><b>공지사항</b><span>회의·교육·모집 안내</span></a>
     <a href="jawon.html"><span class="ico">🗺️</span><b>복지자원 현황</b><span>중구 복지기관 62곳 찾기</span></a>
   </div>
 </div>
@@ -303,10 +303,8 @@ footer .ph{background:rgba(242,163,58,.25);color:#fff}
     <div class="sec-title"><div><div class="eyebrow">NEWS</div><h2>소식·공지</h2></div></div>
     <div class="board">
       <div class="list">
-        <h3>공지사항</h3>
-        <ul>
-          <li><span class="t"><span class="tag">NEW</span>대구중구지역사회보장협의체 홈페이지를 열었습니다</span><time>2026.10.29</time></li>
-        </ul>
+        <h3>공지사항 <a href="notice.html">더보기 +</a></h3>
+        <ul id="notice-latest"><li><span class="t">공지를 불러오고 있어요…</span></li></ul>
       </div>
       <div class="list">
         <h3>활동 소식 <a href="news.html">더보기 +</a></h3>
@@ -401,6 +399,11 @@ loadNews({ limit: 4 }).then(items => {
   const el = document.getElementById("news-latest");
   el.innerHTML = items.length ? items.map(n => `<li><a class="t" href="news.html"><span class="cat">${newsEsc(newsTag(n))}</span>${newsEsc(n.title)}</a><time>${newsDate(n.date)}</time></li>`).join("")
     : `<li><span class="t">아직 올라온 소식이 없어요.</span></li>`;
+});
+loadNotices({ limit: 4 }).then(items => {
+  const el = document.getElementById("notice-latest");
+  el.innerHTML = items.length ? items.map(n => `<li><a class="t" href="notice.html#${encodeURIComponent(n.id)}">${n.pin || noticeIsNew(n) ? `<span class="tag">${n.pin ? "중요" : "NEW"}</span>` : `<span class="cat">${newsEsc(n.head || "공지")}</span>`}${newsEsc(n.title)}</a><time>${newsDate(n.date)}</time></li>`).join("")
+    : `<li><span class="t">아직 올라온 공지가 없어요.</span></li>`;
 });
 </script>
 </body>

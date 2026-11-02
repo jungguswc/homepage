@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>소식 올리기 | 대구중구지역사회보장협의체</title>
+<title>소식·공지 올리기 | 대구중구지역사회보장협의체</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,6 +72,14 @@ textarea{min-height:130px;resize:vertical}
 .msg{border-radius:10px;padding:12px 14px;font-size:14.5px;margin-bottom:14px}
 .msg.err{background:#FDECEC;color:#9B2C2C}
 .msg.ok{background:var(--ok-l);color:var(--ok)}
+.types{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}
+.types button{border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:12px;font:inherit;font-weight:700;font-size:15px;cursor:pointer;color:var(--muted)}
+.types button[aria-pressed="true"]{border-color:var(--main);background:var(--main-l);color:var(--main-d)}
+.chk{display:flex;align-items:center;gap:8px;font-size:15px;cursor:pointer}
+.chk input{width:18px;height:18px;accent-color:var(--main)}
+.flist{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.flist div{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--soft);border-radius:10px;padding:8px 12px;font-size:14px;word-break:break-all}
+.flist button{border:0;background:none;color:#9B2C2C;font:inherit;font-weight:700;cursor:pointer;flex-shrink:0}
 .notice{font-size:13px;color:var(--muted);background:var(--soft);border-radius:10px;padding:10px 12px;margin-bottom:16px}
 
 footer{background:#151A33;color:#B6BBD1;padding:36px 0;font-size:14px}
@@ -101,9 +109,9 @@ footer b{color:#fff}
 
 <div class="sub-hero">
   <div class="wrap">
-    <div class="crumb"><a href="./">홈</a> › <a href="news.html">활동 소식</a> › 소식 올리기</div>
-    <h1>소식 올리기</h1>
-    <p>사무국과 동 복지팀 담당자가 협의체 활동 소식을 올리는 곳입니다</p>
+    <div class="crumb"><a href="./">홈</a> › <a href="news.html">소식·공지</a> › 올리기</div>
+    <h1>소식·공지 올리기</h1>
+    <p>사무국과 동 복지팀 담당자가 활동 소식을, 사무국이 공지사항을 올리는 곳입니다</p>
   </div>
 </div>
 
@@ -125,24 +133,41 @@ footer b{color:#fff}
     <div class="who"><span id="who"></span><button type="button" id="logout">나가기</button></div>
     <div class="msg err" id="err" hidden></div>
     <div class="msg ok" id="ok" hidden></div>
+    <div class="types" id="types" role="group" aria-label="글 종류" hidden>
+      <button type="button" data-t="news" aria-pressed="true">📷 활동 소식</button>
+      <button type="button" data-t="notice" aria-pressed="false">📢 공지사항</button>
+    </div>
     <form id="form">
+      <div class="row" id="notice-row" hidden>
+        <div class="f"><label for="head">말머리</label><select id="head"></select></div>
+        <div class="f"><span class="lb">상단 고정</span><label class="chk"><input type="checkbox" id="pin"> 목록 맨 위에 고정</label></div>
+      </div>
       <div class="row" id="cat-row">
         <div class="f"><label for="category">구분</label><select id="category"><option>구 협의체</option><option>동 협의체</option></select></div>
         <div class="f" id="dong-f" hidden><label for="dongsel">동</label><select id="dongsel"></select></div>
       </div>
-      <div class="f"><label for="date">활동일</label><input type="date" id="date" required></div>
+      <div class="f"><label for="date" id="date-lb">활동일</label><input type="date" id="date" required></div>
       <div class="f"><label for="title">제목</label><input type="text" id="title" maxlength="60" required placeholder="예) 동 협의체 위원과 함께한 이웃 안부 살피기"></div>
-      <div class="f"><label for="body">내용</label><textarea id="body" maxlength="1000" required placeholder="언제, 어디서, 누가, 무엇을 했는지 3~5줄로 적어 주세요."></textarea><small><span id="cnt">0</span> / 1000자</small></div>
+      <div class="f"><label for="body">내용</label><textarea id="body" maxlength="1000" required placeholder="언제, 어디서, 누가, 무엇을 했는지 3~5줄로 적어 주세요."></textarea><small><span id="cnt">0</span> / <span id="max">1000</span>자</small></div>
       <div class="f">
-        <span class="lb">사진 (1~3장, 필수)</span>
+        <span class="lb" id="photo-lb">사진 (1~3장, 필수)</span>
         <label class="pick" for="photo">📷 눌러서 사진 고르기<br><small>휴대폰에서는 바로 촬영할 수도 있어요</small></label>
         <input type="file" id="photo" accept="image/*" multiple hidden>
         <div class="thumbs" id="thumbs"></div>
       </div>
-      <p class="notice">얼굴이 알아보이는 대상자 사진은 게재 동의를 받은 경우에만 올려 주세요. 개인정보(이름표, 주소, 연락처)가 보이지 않게 해 주세요.</p>
+      <div id="notice-extra" hidden>
+        <div class="f">
+          <span class="lb">첨부파일 (선택, 3개까지 · 1개당 8MB 이하)</span>
+          <label class="pick" for="file">📎 눌러서 파일 고르기<br><small>공고문 PDF, 한글(hwp), 엑셀 등</small></label>
+          <input type="file" id="file" accept=".pdf,.hwp,.hwpx,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.jpg,.jpeg,.png" multiple hidden>
+          <div class="flist" id="flist"></div>
+        </div>
+        <div class="f"><label for="link">관련 링크 (선택)</label><input type="text" id="link" inputmode="url" placeholder="예) https://www.jung.daegu.kr/..."><small>중구청 고시·공고 페이지 등 바로가기 주소</small></div>
+      </div>
+      <p class="notice" id="photo-notice">얼굴이 알아보이는 대상자 사진은 게재 동의를 받은 경우에만 올려 주세요. 개인정보(이름표, 주소, 연락처)가 보이지 않게 해 주세요.</p>
       <button class="btn pri" type="submit" id="send">소식 등록하기</button>
     </form>
-    <a class="btn sub" href="news.html">등록된 소식 보기</a>
+    <a class="btn sub" href="news.html" id="view">등록된 소식 보기</a>
   </section>
 
 </main>
@@ -154,7 +179,9 @@ footer b{color:#fff}
 <script src="news.js"></script>
 <script>
 const $ = id => document.getElementById(id);
-let AUTH = null, SHOTS = [];
+let AUTH = null, SHOTS = [], FILES = [], TYPE = "news";
+const WANT = new URLSearchParams(location.search).get("type") === "notice" ? "notice" : "news";
+$("head").innerHTML = NOTICE_HEADS.map(h => `<option>${h}</option>`).join("");
 $("dongsel").innerHTML = NEWS_DONGS.map(d => `<option>${d}</option>`).join("");
 $("date").value = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
 
@@ -171,11 +198,53 @@ $("gate-form").addEventListener("submit", async e => {
     if (j.status !== "ok") throw new Error(j.message || "접속코드가 맞지 않습니다.");
     AUTH = { code: $("code").value.trim(), role: j.role, name: j.name, dong: j.dong };
     $("who").textContent = `${j.name} 으로 접속했어요` + (j.role === "동" ? " · 사무국 확인 후 게시" : " · 바로 게시");
-    $("cat-row").hidden = j.role === "동";
+    $("types").hidden = j.role !== "사무국";
+    setType(j.role === "사무국" ? WANT : "news");
     $("gate").hidden = true; $("editor").hidden = false;
   } catch (err) { show($("gate-err"), err.message || "확인하지 못했어요. 인터넷 연결을 확인해 주세요."); }
   $("gate-btn").disabled = false; $("gate-btn").textContent = "확인";
 });
+
+function setType(t){
+  TYPE = t; const nt = t === "notice";
+  $("types").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.t === t)));
+  $("notice-row").hidden = !nt; $("notice-extra").hidden = !nt;
+  $("cat-row").hidden = nt || AUTH.role === "동";
+  $("date-lb").textContent = nt ? "게시일" : "활동일";
+  $("title").placeholder = nt ? "예) 2027년 지역사회보장 연차별 시행계획(안) 공고" : "예) 동 협의체 위원과 함께한 이웃 안부 살피기";
+  $("body").placeholder = nt ? "공지 내용을 적어 주세요. (기간, 장소, 대상, 문의처 등)" : "언제, 어디서, 누가, 무엇을 했는지 3~5줄로 적어 주세요.";
+  $("body").maxLength = nt ? 3000 : 1000; $("max").textContent = nt ? "3000" : "1000";
+  $("photo-lb").textContent = nt ? "이미지 (선택, 포스터·안내문 등 3장까지)" : "사진 (1~3장, 필수)";
+  $("photo-notice").hidden = nt;
+  $("send").textContent = nt ? "공지 등록하기" : "소식 등록하기";
+  $("view").textContent = nt ? "등록된 공지 보기" : "등록된 소식 보기";
+  $("view").href = nt ? "notice.html" : "news.html";
+  show($("err"), ""); show($("ok"), "");
+}
+$("types").addEventListener("click", e => { const b = e.target.closest("button"); if (b) setType(b.dataset.t); });
+
+/* 첨부파일: 원본 그대로 base64 */
+function readFile(f){
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(String(r.result).split(",")[1]);
+    r.onerror = () => reject(new Error("파일을 읽지 못했어요."));
+    r.readAsDataURL(f);
+  });
+}
+function drawFiles(){
+  $("flist").innerHTML = FILES.map((f, i) => `<div><span>📎 ${newsEsc(f.name)} <small>(${(f.size / 1048576).toFixed(1)}MB)</small></span><button type="button" data-i="${i}">빼기</button></div>`).join("");
+}
+$("file").addEventListener("change", async e => {
+  show($("err"), "");
+  for (const f of [...e.target.files]) {
+    if (FILES.length >= 3) { show($("err"), "첨부파일은 3개까지 올릴 수 있어요."); break; }
+    if (f.size > 8 * 1048576) { show($("err"), `「${f.name}」은 8MB가 넘어요. PDF로 줄여서 올려 주세요.`); continue; }
+    try { FILES.push({ name: f.name, size: f.size, mime: f.type || "application/octet-stream", data: await readFile(f) }); } catch (err) { show($("err"), err.message); }
+  }
+  e.target.value = ""; drawFiles();
+});
+$("flist").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { FILES.splice(+b.dataset.i, 1); drawFiles(); } });
 
 $("logout").addEventListener("click", () => { AUTH = null; $("code").value = ""; $("editor").hidden = true; $("gate").hidden = false; });
 $("category").addEventListener("change", () => { $("dong-f").hidden = $("category").value !== "동 협의체"; });
@@ -213,24 +282,33 @@ $("thumbs").addEventListener("click", e => { const b = e.target.closest("button"
 $("form").addEventListener("submit", async e => {
   e.preventDefault();
   show($("err"), ""); show($("ok"), "");
-  if (!SHOTS.length) { show($("err"), "사진을 1장 이상 올려 주세요."); return; }
-  const payload = {
+  const nt = TYPE === "notice";
+  if (!nt && !SHOTS.length) { show($("err"), "사진을 1장 이상 올려 주세요."); return; }
+  const link = $("link").value.trim();
+  if (nt && link && !/^https?:\/\//.test(link)) { show($("err"), "링크는 http:// 또는 https:// 로 시작해야 해요."); return; }
+  const payload = nt ? {
+    action: "notice", code: AUTH.code, head: $("head").value, pin: $("pin").checked,
+    date: $("date").value, title: $("title").value.trim(), body: $("body").value.trim(), link,
+    photos: SHOTS.map(s => ({ mime: "image/jpeg", data: s.split(",")[1] })),
+    files: FILES.map(f => ({ name: f.name, mime: f.mime, data: f.data }))
+  } : {
     action: "post", code: AUTH.code,
     category: AUTH.role === "동" ? "동 협의체" : $("category").value,
     dong: AUTH.role === "동" ? AUTH.dong : $("dongsel").value,
     date: $("date").value, title: $("title").value.trim(), body: $("body").value.trim(),
     photos: SHOTS.map(s => ({ mime: "image/jpeg", data: s.split(",")[1] }))
   };
-  $("send").disabled = true; $("send").textContent = "등록하는 중… (사진 크기에 따라 10초 정도 걸려요)";
+  $("send").disabled = true; $("send").textContent = "등록하는 중… (사진·파일 크기에 따라 10~20초 걸려요)";
   try {
     const r = await fetch(NEWS_API_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
     const j = await r.json();
     if (j.status !== "ok") throw new Error(j.message || "등록하지 못했어요.");
     show($("ok"), j.message);
     $("title").value = ""; $("body").value = ""; $("cnt").textContent = "0"; SHOTS = []; drawThumbs();
+    FILES = []; drawFiles(); $("link").value = ""; $("pin").checked = false;
     window.scrollTo({ top: 0, behavior: "smooth" });
   } catch (err) { show($("err"), err.message || "등록하지 못했어요. 잠시 후 다시 시도해 주세요."); }
-  $("send").disabled = false; $("send").textContent = "소식 등록하기";
+  $("send").disabled = false; $("send").textContent = nt ? "공지 등록하기" : "소식 등록하기";
 });
 </script>
 </body>
