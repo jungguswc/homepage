@@ -164,7 +164,7 @@ function open_(n){
   document.getElementById("dlg-meta").innerHTML = `${headBadge(n)}<time>${newsDate(n.date)}</time>`;
   document.getElementById("dlg-title").textContent = n.title;
   document.getElementById("dlg-body").textContent = n.body;
-  document.getElementById("dlg-shots").innerHTML = (n.photos || []).map((p, i) => `<img src="${newsEsc(newsPhotoUrl(p, 1600))}" alt="${newsEsc(n.title)} 이미지 ${i + 1}" loading="lazy">`).join("");
+  document.getElementById("dlg-shots").innerHTML = (n.photos || []).map((p, i) => newsImg(p, 1600, `${n.title} 이미지 ${i + 1}`)).join("");
   document.getElementById("dlg-files").innerHTML =
     (n.files || []).map(f => `<a href="${newsEsc(noticeFileUrl(f))}" target="_blank" rel="noopener">📎 ${newsEsc(f.name || "첨부파일")}</a>`).join("") +
     (n.link ? `<a class="lnk" href="${newsEsc(n.link)}" target="_blank" rel="noopener">관련 페이지 바로가기 →</a>` : "");

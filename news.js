@@ -18,10 +18,25 @@ const NEWS_SEED = [
 
 const NEWS_DONGS = ["동인동","삼덕동","성내1동","성내2동","성내3동","대신동","남산1동","남산2동","남산3동","남산4동","대봉1동","대봉2동"];
 
+/* 사진 주소: 구글 사진 서버(lh3)를 먼저, 안 되면 드라이브 썸네일로 */
 function newsPhotoUrl(p, size) {
   if (!p) return "";
   if (/^(news\/|https?:)/.test(p)) return p;
+  return "https://lh3.googleusercontent.com/d/" + encodeURIComponent(p) + "=w" + (size || 1200);
+}
+function newsPhotoAlt(p, size) {
+  if (!p || /^(news\/|https?:)/.test(p)) return "";
   return "https://drive.google.com/thumbnail?id=" + encodeURIComponent(p) + "&sz=w" + (size || 1200);
+}
+/* 배경용: 두 주소를 겹쳐 두면 앞의 것이 안 열려도 뒤의 것이 보임 */
+function newsPhotoBg(p, size) {
+  const a = newsPhotoUrl(p, size), b = newsPhotoAlt(p, size);
+  return "url('" + newsEsc(a) + "')" + (b ? ", url('" + newsEsc(b) + "')" : "");
+}
+/* 사진 태그: 첫 주소가 안 열리면 드라이브 썸네일로 바꿈 */
+function newsImg(p, size, alt) {
+  const b = newsPhotoAlt(p, size);
+  return `<img src="${newsEsc(newsPhotoUrl(p, size))}"${b ? ` data-alt="${newsEsc(b)}" onerror="if(this.dataset.alt){this.src=this.dataset.alt;this.removeAttribute('data-alt')}"` : ""} alt="${newsEsc(alt)}" loading="lazy">`;
 }
 
 function newsEsc(s) {

@@ -152,7 +152,7 @@ function draw(){
   if (!rows.length) { el.innerHTML = `<p class="empty" style="grid-column:1/-1">아직 올라온 소식이 없어요.</p>`; return; }
   el.innerHTML = rows.map((n, i) => `
     <button type="button" class="card" data-i="${ALL.indexOf(n)}">
-      <div class="ph" style="background-image:url('${newsEsc(newsPhotoUrl(n.photos[0], 800))}')">${n.photos.length > 1 ? `<em>사진 ${n.photos.length}장</em>` : ""}</div>
+      <div class="ph" style="background-image:${newsPhotoBg(n.photos[0], 800)}">${n.photos.length > 1 ? `<em>사진 ${n.photos.length}장</em>` : ""}</div>
       <div class="tx">
         <div class="meta"><span class="badge ${n.category === "동 협의체" ? "dong" : ""}">${newsEsc(newsTag(n))}</span><time>${newsDate(n.date)}</time></div>
         <h3>${newsEsc(n.title)}</h3>
@@ -165,7 +165,7 @@ function open_(n){
   document.getElementById("dlg-meta").innerHTML = `<span class="badge ${n.category === "동 협의체" ? "dong" : ""}">${newsEsc(newsTag(n))}</span><time>${newsDate(n.date)}</time>`;
   document.getElementById("dlg-title").textContent = n.title;
   document.getElementById("dlg-body").textContent = n.body;
-  document.getElementById("dlg-shots").innerHTML = n.photos.map((p, i) => `<img src="${newsEsc(newsPhotoUrl(p, 1600))}" alt="${newsEsc(n.title)} 사진 ${i + 1}" loading="lazy">`).join("");
+  document.getElementById("dlg-shots").innerHTML = n.photos.map((p, i) => newsImg(p, 1600, `${n.title} 사진 ${i + 1}`)).join("");
   document.getElementById("dlg").showModal();
 }
 

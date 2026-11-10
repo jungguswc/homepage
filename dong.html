@@ -328,7 +328,7 @@ function render(id){
   if (d && typeof loadNews === "function") {
     loadNews({ dong: d.name, limit: 6 }).then(items => {
       const el = document.getElementById("dnews"); if (!el) return;
-      el.innerHTML = items.length ? items.map(n => `<a class="dn" href="news.html"><span class="dn-ph" style="background-image:url('${newsEsc(newsPhotoUrl(n.photos[0], 600))}')"></span><span class="dn-tx"><time>${newsDate(n.date)}</time><b>${newsEsc(n.title)}</b></span></a>`).join("")
+      el.innerHTML = items.length ? items.map(n => `<a class="dn" href="news.html"><span class="dn-ph" style="background-image:${newsPhotoBg(n.photos[0], 600)}"></span><span class="dn-tx"><time>${newsDate(n.date)}</time><b>${newsEsc(n.title)}</b></span></a>`).join("")
         : `<p class="dn-empty">${esc(d.name)} 협의체 소식이 올라오면 이곳에 사진과 함께 보여요.</p>`;
     });
   }
