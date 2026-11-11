@@ -400,6 +400,7 @@ loadNews({ limit: 4 }).then(items => {
   el.innerHTML = items.length ? items.map(n => `<li><a class="t" href="news.html"><span class="cat">${newsEsc(newsTag(n))}</span>${newsEsc(n.title)}</a><time>${newsDate(n.date)}</time></li>`).join("")
     : `<li><span class="t">아직 올라온 소식이 없어요.</span></li>`;
 });
+noticePopupInit();
 loadNotices({ limit: 4 }).then(items => {
   const el = document.getElementById("notice-latest");
   el.innerHTML = items.length ? items.map(n => `<li><a class="t" href="notice.html#${encodeURIComponent(n.id)}">${n.pin || noticeIsNew(n) ? `<span class="tag">${n.pin ? "중요" : "NEW"}</span>` : `<span class="cat">${newsEsc(n.head || "공지")}</span>`}${newsEsc(n.title)}</a><time>${newsDate(n.date)}</time></li>`).join("")

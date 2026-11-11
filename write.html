@@ -162,6 +162,15 @@ footer b{color:#fff}
           <input type="file" id="file" accept=".pdf,.hwp,.hwpx,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.jpg,.jpeg,.png" multiple hidden>
           <div class="flist" id="flist"></div>
         </div>
+        <div class="f">
+          <span class="lb">메인 화면 팝업 (선택)</span>
+          <label class="chk"><input type="checkbox" id="popup"> 홈페이지 첫 화면에 팝업으로 띄우기</label>
+          <div class="row" id="popup-dates" hidden style="margin-top:10px">
+            <div class="f"><label for="pfrom">팝업 시작일</label><input type="date" id="pfrom"></div>
+            <div class="f"><label for="pto">팝업 종료일</label><input type="date" id="pto"></div>
+          </div>
+          <small>기간 동안만 팝업으로 뜨고, 공지사항 목록에는 계속 남아요.</small>
+        </div>
         <div class="f"><label for="link">관련 링크 (선택)</label><input type="text" id="link" inputmode="url" placeholder="예) https://www.jung.daegu.kr/..."><small>중구청 고시·공고 페이지 등 바로가기 주소</small></div>
       </div>
       <p class="notice" id="photo-notice">얼굴이 알아보이는 대상자 사진은 게재 동의를 받은 경우에만 올려 주세요. 개인정보(이름표, 주소, 연락처)가 보이지 않게 해 주세요.</p>
@@ -221,6 +230,15 @@ function setType(t){
   $("view").href = nt ? "notice.html" : "news.html";
   show($("err"), ""); show($("ok"), "");
 }
+/* 팝업 기간: 체크하면 오늘~7일 뒤로 채움 */
+function ymdLocal(d){ return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+$("popup").addEventListener("change", () => {
+  $("popup-dates").hidden = !$("popup").checked;
+  if ($("popup").checked && !$("pfrom").value) {
+    const t = new Date(); $("pfrom").value = ymdLocal(t);
+    t.setDate(t.getDate() + 7); $("pto").value = ymdLocal(t);
+  }
+});
 $("types").addEventListener("click", e => { const b = e.target.closest("button"); if (b) setType(b.dataset.t); });
 
 /* 첨부파일: 원본 그대로 base64 */
@@ -286,8 +304,12 @@ $("form").addEventListener("submit", async e => {
   if (!nt && !SHOTS.length) { show($("err"), "사진을 1장 이상 올려 주세요."); return; }
   const link = $("link").value.trim();
   if (nt && link && !/^https?:\/\//.test(link)) { show($("err"), "링크는 http:// 또는 https:// 로 시작해야 해요."); return; }
+  const pop = nt && $("popup").checked;
+  if (pop && (!$("pfrom").value || !$("pto").value)) { show($("err"), "팝업 시작일과 종료일을 넣어 주세요."); return; }
+  if (pop && $("pfrom").value > $("pto").value) { show($("err"), "팝업 종료일이 시작일보다 빨라요."); return; }
   const payload = nt ? {
     action: "notice", code: AUTH.code, head: $("head").value, pin: $("pin").checked,
+    popup: pop, popupFrom: pop ? $("pfrom").value : "", popupTo: pop ? $("pto").value : "",
     date: $("date").value, title: $("title").value.trim(), body: $("body").value.trim(), link,
     photos: SHOTS.map(s => ({ mime: "image/jpeg", data: s.split(",")[1] })),
     files: FILES.map(f => ({ name: f.name, mime: f.mime, data: f.data }))
@@ -306,6 +328,7 @@ $("form").addEventListener("submit", async e => {
     show($("ok"), j.message);
     $("title").value = ""; $("body").value = ""; $("cnt").textContent = "0"; SHOTS = []; drawThumbs();
     FILES = []; drawFiles(); $("link").value = ""; $("pin").checked = false;
+    $("popup").checked = false; $("popup-dates").hidden = true;
     window.scrollTo({ top: 0, behavior: "smooth" });
   } catch (err) { show($("err"), err.message || "등록하지 못했어요. 잠시 후 다시 시도해 주세요."); }
   $("send").disabled = false; $("send").textContent = nt ? "공지 등록하기" : "소식 등록하기";

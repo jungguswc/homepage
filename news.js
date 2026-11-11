@@ -68,7 +68,7 @@ function newsTag(n) {
 }
 
 /* ───────────── 공지사항 ───────────── */
-const NOTICE_HEADS = ["공지", "공고", "모집", "교육", "회의"];
+const NOTICE_HEADS = ["공지", "공고", "모집", "교육", "회의", "캠페인"];
 
 /* 홈페이지에 고정으로 넣어 둔 공지 (첨부파일은 notice 폴더) */
 const NOTICE_SEED = [
@@ -122,4 +122,80 @@ async function loadNotices(opts) {
 function noticeIsNew(n) {
   const d = new Date(String(n.date) + "T00:00:00+09:00");
   return !isNaN(d) && (Date.now() - d.getTime()) < 14 * 864e5;
+}
+
+/* ───────────── 메인 화면 공지 팝업 ─────────────
+ * 공지에 팝업 시작일·종료일(popupFrom, popupTo)이 있으면 그 기간 동안 첫 화면에 띄움.
+ * '오늘 하루 보지 않기'는 이 브라우저에만 기억됨.
+ */
+function noticeToday() {
+  try { return new Date().toLocaleDateString("sv-SE", { timeZone: "Asia/Seoul" }); }
+  catch (e) { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+}
+
+async function noticePopupInit() {
+  const today = noticeToday();
+  const items = await loadNotices();
+  const live = items.filter(n => n.popupFrom && n.popupTo && n.popupFrom <= today && today <= n.popupTo);
+  if (!live.length) return;
+  live.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+  const n = live[0];
+  const key = "notice-popup-hide-" + n.id;
+  try { if (localStorage.getItem(key) === today) return; } catch (e) {}
+
+  if (!document.getElementById("np-style")) {
+    const st = document.createElement("style");
+    st.id = "np-style";
+    st.textContent = `
+.np-back{position:fixed;inset:0;background:rgba(20,24,45,.55);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
+.np{outline:none;background:#fff;border-radius:18px;width:100%;max-width:440px;max-height:calc(100vh - 32px);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 50px rgba(20,24,45,.35)}
+.np-top{background:var(--main,#3346A8);color:#fff;padding:14px 20px;font-size:13px;font-weight:700;letter-spacing:.02em}
+.np-in{padding:18px 20px 6px;overflow:auto}
+.np-in h2{font-size:19px;line-height:1.45;color:var(--main-d,#22307A);margin:0 0 10px}
+.np-in .np-meta{font-size:12.5px;color:#6B7186;margin-bottom:8px}
+.np-in img{width:100%;max-height:62vh;object-fit:contain;border-radius:10px;display:block;margin-bottom:12px}
+.np-in p{font-size:15px;line-height:1.7;white-space:pre-line;margin:0;display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden}
+.np-act{display:flex;flex-direction:column;gap:8px;padding:14px 20px 4px}
+.np-act a{display:block;text-align:center;border-radius:10px;padding:11px;font-weight:700;font-size:15px;text-decoration:none}
+.np-act .go{background:var(--accent,#F2A33A);color:#3a2500}
+.np-act .lk{border:1px solid var(--line,#E3E6EF);color:var(--main-d,#22307A)}
+.np-foot{display:flex;border-top:1px solid #E3E6EF;margin-top:12px}
+.np-foot button{flex:1;border:0;background:#F7F8FC;padding:13px;font:inherit;font-size:14px;color:#454B60;cursor:pointer}
+.np-foot button+button{border-left:1px solid #E3E6EF}
+.np-foot button:hover{background:#EEF0F8}`;
+    document.head.appendChild(st);
+  }
+
+  const wrap = document.createElement("div");
+  wrap.className = "np-back";
+  wrap.innerHTML = `
+    <div class="np" role="dialog" aria-modal="true" aria-labelledby="np-title" tabindex="-1">
+      <div class="np-top">📢 ${newsEsc(n.head || "공지")}</div>
+      <div class="np-in">
+        <div class="np-meta">${newsDate(n.date)}</div>
+        <h2 id="np-title">${newsEsc(n.title)}</h2>
+        ${(n.photos || []).length ? newsImg(n.photos[0], 900, n.title) : ""}
+        ${(n.photos || []).length ? "" : `<p>${newsEsc(n.body)}</p>`}
+      </div>
+      <div class="np-act">
+        <a class="go" href="notice.html#${encodeURIComponent(n.id)}">자세히 보기 →</a>
+        ${n.link ? `<a class="lk" href="${newsEsc(n.link)}" target="_blank" rel="noopener">관련 페이지 바로가기</a>` : ""}
+      </div>
+      <div class="np-foot">
+        <button type="button" data-a="today">오늘 하루 보지 않기</button>
+        <button type="button" data-a="close">닫기</button>
+      </div>
+    </div>`;
+  const close = () => { wrap.remove(); document.removeEventListener("keydown", onKey); };
+  const onKey = e => { if (e.key === "Escape") close(); };
+  wrap.addEventListener("click", e => {
+    if (e.target === wrap) return close();
+    const b = e.target.closest("button[data-a]");
+    if (!b) return;
+    if (b.dataset.a === "today") { try { localStorage.setItem(key, today); } catch (err) {} }
+    close();
+  });
+  document.addEventListener("keydown", onKey);
+  document.body.appendChild(wrap);
+  wrap.querySelector(".np").focus();
 }
