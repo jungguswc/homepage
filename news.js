@@ -64,18 +64,18 @@ async function loadNews(opts) {
   if (NEWS_API_URL) {
     try {
       const q = new URLSearchParams({ action: "news" });
-      if (opts.dong) q.set("dong", opts.dong);
       const j = await newsFetchJson(NEWS_API_URL + "?" + q.toString());
       if (j.status === "ok" && Array.isArray(j.items)) items = items.concat(j.items);
     } catch (e) { /* 연결이 안 되면 고정 소식만 보여줌 */ }
   }
-  if (opts.dong) items = items.filter(n => n.dong === opts.dong);
+  if (opts.dong) items = items.filter(n => n.dong === opts.dong || n.dong === "공통");  /* 공통 = 12개 동 공통 소식 */
   items.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
   return opts.limit ? items.slice(0, opts.limit) : items;
 }
 
 function newsTag(n) {
-  return n.category === "동 협의체" ? (n.dong || "동 협의체") : "구 협의체";
+  if (n.category !== "동 협의체") return "구 협의체";
+  return n.dong === "공통" ? "동 협의체 공통" : (n.dong || "동 협의체");
 }
 
 /* ───────────── 공지사항 ───────────── */

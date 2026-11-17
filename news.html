@@ -147,7 +147,7 @@ dongSel.insertAdjacentHTML("beforeend", NEWS_DONGS.map(d => `<option>${d}</optio
 
 function draw(){
   const d = dongSel.value;
-  const rows = ALL.filter(n => (cat === "전체" || n.category === cat) && (cat !== "동 협의체" || !d || n.dong === d));
+  const rows = ALL.filter(n => (cat === "전체" || n.category === cat) && (cat !== "동 협의체" || !d || n.dong === d || n.dong === "공통"));
   const el = document.getElementById("list");
   const note = LOADED && NEWS_API_FAILED ? `<p class="empty" style="grid-column:1/-1;padding:12px 0">일부 소식을 불러오지 못했어요. 잠시 후 새로고침해 주세요.</p>` : "";
   if (!rows.length) { el.innerHTML = note || `<p class="empty" style="grid-column:1/-1">${LOADED ? "아직 올라온 소식이 없어요." : "소식을 불러오고 있어요…"}</p>`; return; }
