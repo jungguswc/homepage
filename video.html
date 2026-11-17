@@ -52,6 +52,8 @@ main.wrap{padding-block:28px 72px}
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
 .tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink)}
 .tab[aria-pressed="true"]{background:var(--main);border-color:var(--main);color:#fff}
+.ytbtn{background:#E62117;color:#fff;border-radius:999px;padding:9px 18px;font-weight:700;font-size:14.5px;white-space:nowrap}
+.ytbtn:hover{background:#C41A12}
 .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
 .vcard{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;cursor:pointer;text-align:left;font:inherit;color:inherit;padding:0;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
 .vcard:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(34,48,122,.12)}
@@ -107,7 +109,10 @@ footer b{color:#fff}
 </div>
 
 <main class="wrap">
-  <nav class="switch" aria-label="자료실"><a href="gyehoek.html">지역사회보장계획</a><a href="video.html" class="on" aria-current="page">영상 자료</a></nav>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px">
+    <nav class="switch" aria-label="자료실" style="margin-bottom:0"><a href="gyehoek.html">지역사회보장계획</a><a href="video.html" class="on" aria-current="page">영상 자료</a></nav>
+    <a class="ytbtn" href="https://www.youtube.com/channel/UC8d0t7k7S2Z6U_x6XuW7EUA" target="_blank" rel="noopener">▶ 협의체 유튜브 채널</a>
+  </div>
   <div class="tabs" role="group" aria-label="분류"></div>
   <div class="vgrid" id="list" aria-live="polite"><p class="empty">영상을 불러오고 있어요…</p></div>
 </main>
@@ -122,7 +127,7 @@ footer b{color:#fff}
 </dialog>
 
 <footer>
-  <div class="wrap"><b>대구중구지역사회보장협의체 사무국</b> · 대구광역시 중구 국채보상로139길 1, 4층 · 전화 053-661-2288 · actor0204@korea.kr · © 2026</div>
+  <div class="wrap"><b>대구중구지역사회보장협의체 사무국</b> · 대구광역시 중구 국채보상로139길 1, 4층 · 전화 053-661-2288 · actor0204@korea.kr · <a href="https://www.youtube.com/channel/UC8d0t7k7S2Z6U_x6XuW7EUA" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">유튜브 채널</a> · © 2026</div>
 </footer>
 
 <script src="news.js"></script>
@@ -135,7 +140,7 @@ function draw(){
   tabs.innerHTML = cats.length > 2 ? cats.map(c => `<button type="button" class="tab" data-c="${newsEsc(c)}" aria-pressed="${c === cat}">${newsEsc(c)}</button>`).join("") : "";
   const rows = ALL.filter(v => cat === "전체" || v.cat === cat);
   const el = document.getElementById("list");
-  if (!rows.length) { el.innerHTML = `<p class="empty">아직 올라온 영상이 없어요.<br>복지리더아카데미 영상이 곧 올라올 예정이에요.</p>`; return; }
+  if (!rows.length) { el.innerHTML = `<p class="empty">아직 올라온 영상이 없어요.<br><a href="https://www.youtube.com/channel/UC8d0t7k7S2Z6U_x6XuW7EUA" target="_blank" rel="noopener" style="color:var(--main);font-weight:700">협의체 유튜브 채널</a>에서 새 영상을 확인해 주세요.</p>`; return; }
   el.innerHTML = rows.map(v => `
     <button type="button" class="vcard" data-id="${newsEsc(v.id)}">
       <div class="vthumb" style="background-image:url('${newsEsc(videoThumb(v.yt))}')" role="img" aria-label="${newsEsc(v.title)} 미리보기"></div>

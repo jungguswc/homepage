@@ -204,6 +204,10 @@ footer .ph{background:rgba(242,163,58,.25);color:#fff}
 .vrow a:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(34,48,122,.12)}
 .vrow .th{position:relative;aspect-ratio:16/9;background:#1b1f33 center/cover no-repeat}
 .vrow .th::after{content:"";position:absolute;left:50%;top:50%;width:54px;height:38px;margin:-19px 0 0 -27px;border-radius:11px;background:rgba(220,30,30,.9) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M8 5v14l11-7z'/%3E%3C/svg%3E") center/20px no-repeat}
+.vrow .ytcard{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:20px;grid-column:1/-1;max-width:560px}
+.vrow .ytcard .yi{background:#E62117;color:#fff;border-radius:10px;width:46px;height:32px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.vrow .ytcard b{padding:0}
+.vrow .ytcard small{color:var(--muted);font-size:14px}
 .vrow b{display:block;padding:12px 14px 14px;font-size:15.5px;line-height:1.45;color:var(--main-d)}
 </style>
 </head>
@@ -320,9 +324,9 @@ footer .ph{background:rgba(242,163,58,.25);color:#fff}
   </div>
 </section>
 
-<section id="video" hidden>
+<section id="video">
   <div class="wrap">
-    <div class="sec-title"><div><div class="eyebrow">VIDEO</div><h2>영상 자료</h2><p>복지리더아카데미 등 협의체 교육·행사 영상을 보실 수 있습니다.</p></div><a href="video.html">전체 보기 →</a></div>
+    <div class="sec-title"><div><div class="eyebrow">VIDEO</div><h2>영상 자료</h2><p>복지리더아카데미 등 협의체 교육·행사 영상을 보실 수 있습니다.</p></div><span style="display:flex;gap:14px;flex-wrap:wrap"><a href="https://www.youtube.com/channel/UC8d0t7k7S2Z6U_x6XuW7EUA" target="_blank" rel="noopener">▶ 유튜브 채널</a><a href="video.html">전체 보기 →</a></span></div>
     <div class="vrow" id="video-latest"></div>
   </div>
 </section>
@@ -400,7 +404,7 @@ footer .ph{background:rgba(242,163,58,.25);color:#fff}
       전화 053-661-2288 · 이메일 actor0204@korea.kr</p>
     </div>
     <div>
-      <div class="links"><a href="https://map.kakao.com/?q=%EB%8C%80%EA%B5%AC%20%EC%A4%91%EA%B5%AC%20%EA%B5%AD%EC%B1%84%EB%B3%B4%EC%83%81%EB%A1%9C139%EA%B8%B8%201">찾아오시는 길</a><a href="https://cafe.daum.net/jungguwelfare">협의체 카페</a></div>
+      <div class="links"><a href="https://map.kakao.com/?q=%EB%8C%80%EA%B5%AC%20%EC%A4%91%EA%B5%AC%20%EA%B5%AD%EC%B1%84%EB%B3%B4%EC%83%81%EB%A1%9C139%EA%B8%B8%201">찾아오시는 길</a><a href="https://cafe.daum.net/jungguwelfare">협의체 카페</a><a href="https://www.youtube.com/channel/UC8d0t7k7S2Z6U_x6XuW7EUA" target="_blank" rel="noopener">유튜브 채널</a></div>
       <p style="margin-top:10px">© 2026 대구중구지역사회보장협의체</p>
     </div>
   </div>
@@ -415,7 +419,10 @@ loadNews({ limit: 4 }).then(items => {
 });
 noticePopupInit();
 loadVideos({ limit: 3 }).then(items => {
-  if (!items.length) return;
+  if (!items.length) {
+    document.getElementById("video-latest").innerHTML = `<a class="ytcard" href="https://www.youtube.com/channel/UC8d0t7k7S2Z6U_x6XuW7EUA" target="_blank" rel="noopener"><span class="yi">▶</span><b>대구중구지역사회보장협의체 유튜브 채널</b><small>복지리더아카데미 등 협의체 영상을 유튜브에서 만나 보세요</small></a>`;
+    return;
+  }
   document.getElementById("video-latest").innerHTML = items.map(v => `<a href="video.html#${encodeURIComponent(v.id)}"><div class="th" style="background-image:url('${newsEsc(videoThumb(v.yt))}')"></div><b>${newsEsc(v.title)}</b></a>`).join("");
   document.getElementById("video").hidden = false;
 });
