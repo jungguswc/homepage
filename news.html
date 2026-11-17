@@ -141,7 +141,7 @@ footer b{color:#fff}
 
 <script src="news.js"></script>
 <script>
-let ALL = [], cat = "전체";
+let ALL = [], cat = "전체", LOADED = false;
 const dongSel = document.getElementById("dong");
 dongSel.insertAdjacentHTML("beforeend", NEWS_DONGS.map(d => `<option>${d}</option>`).join(""));
 
@@ -149,7 +149,8 @@ function draw(){
   const d = dongSel.value;
   const rows = ALL.filter(n => (cat === "전체" || n.category === cat) && (cat !== "동 협의체" || !d || n.dong === d));
   const el = document.getElementById("list");
-  if (!rows.length) { el.innerHTML = `<p class="empty" style="grid-column:1/-1">아직 올라온 소식이 없어요.</p>`; return; }
+  const note = LOADED && NEWS_API_FAILED ? `<p class="empty" style="grid-column:1/-1;padding:12px 0">일부 소식을 불러오지 못했어요. 잠시 후 새로고침해 주세요.</p>` : "";
+  if (!rows.length) { el.innerHTML = note || `<p class="empty" style="grid-column:1/-1">${LOADED ? "아직 올라온 소식이 없어요." : "소식을 불러오고 있어요…"}</p>`; return; }
   el.innerHTML = rows.map((n, i) => `
     <button type="button" class="card" data-i="${ALL.indexOf(n)}">
       <div class="ph" style="background-image:${newsPhotoBg(n.photos[0], 800)}">${n.photos.length > 1 ? `<em>사진 ${n.photos.length}장</em>` : ""}</div>
@@ -158,7 +159,7 @@ function draw(){
         <h3>${newsEsc(n.title)}</h3>
         <p>${newsEsc(n.body)}</p>
       </div>
-    </button>`).join("");
+    </button>`).join("") + note;
 }
 
 function open_(n){
@@ -182,7 +183,7 @@ document.getElementById("list").addEventListener("click", e => {
 });
 document.getElementById("dlg").addEventListener("click", e => { if (e.target.id === "dlg") e.target.close(); });
 
-loadNews().then(items => { ALL = items; draw(); });
+loadNews().then(items => { ALL = items; LOADED = true; draw(); });
 </script>
 </body>
 </html>

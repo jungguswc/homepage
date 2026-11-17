@@ -19,6 +19,18 @@ const NEWS_SEED = [
 const NEWS_DONGS = ["동인동","삼덕동","성내1동","성내2동","성내3동","대신동","남산1동","남산2동","남산3동","남산4동","대봉1동","대봉2동"];
 
 /* 사진 주소: 구글 사진 서버(lh3)를 먼저, 안 되면 드라이브 썸네일로 */
+/* 서버 호출: 12초 안에 답이 없으면 포기하고 고정 소식만 보여 줌 */
+let NEWS_API_FAILED = false;
+async function newsFetchJson(url, ms) {
+  const ctl = typeof AbortController === "function" ? new AbortController() : null;
+  const timer = ctl ? setTimeout(() => ctl.abort(), ms || 12000) : null;
+  try {
+    const res = await fetch(url, ctl ? { signal: ctl.signal } : {});
+    return await res.json();
+  } catch (e) { NEWS_API_FAILED = true; throw e; }
+  finally { if (timer) clearTimeout(timer); }
+}
+
 function newsPhotoUrl(p, size) {
   if (!p) return "";
   if (/^(news\/|https?:)/.test(p)) return p;
@@ -53,8 +65,7 @@ async function loadNews(opts) {
     try {
       const q = new URLSearchParams({ action: "news" });
       if (opts.dong) q.set("dong", opts.dong);
-      const res = await fetch(NEWS_API_URL + "?" + q.toString());
-      const j = await res.json();
+      const j = await newsFetchJson(NEWS_API_URL + "?" + q.toString());
       if (j.status === "ok" && Array.isArray(j.items)) items = items.concat(j.items);
     } catch (e) { /* 연결이 안 되면 고정 소식만 보여줌 */ }
   }
@@ -109,8 +120,7 @@ async function loadNotices(opts) {
   let items = NOTICE_SEED.slice();
   if (NEWS_API_URL) {
     try {
-      const res = await fetch(NEWS_API_URL + "?action=notice");
-      const j = await res.json();
+      const j = await newsFetchJson(NEWS_API_URL + "?action=notice");
       if (j.status === "ok" && Array.isArray(j.items)) items = items.concat(j.items);
     } catch (e) { /* 연결이 안 되면 고정 공지만 보여줌 */ }
   }
@@ -198,4 +208,33 @@ async function noticePopupInit() {
   document.addEventListener("keydown", onKey);
   document.body.appendChild(wrap);
   wrap.querySelector(".np").focus();
+}
+
+/* ───────────── 영상 자료 (유튜브) ─────────────
+ * 시트 '영상' 탭(게시 Y) + 아래 고정 목록. yt 에는 유튜브 주소나 영상 ID 어느 쪽이든 가능.
+ */
+const VIDEO_SEED = [
+  // { id: "v-academy-1", cat: "교육", date: "2026-11-12", title: "복지리더아카데미 1강", yt: "https://youtu.be/영상ID", desc: "한 줄 소개" }
+];
+
+function videoId(u) {
+  u = String(u || "").trim();
+  if (/^[\w-]{11}$/.test(u)) return u;
+  const m = u.match(/(?:youtu\.be\/|[?&]v=|\/(?:embed|shorts|live)\/)([\w-]{11})/);
+  return m ? m[1] : "";
+}
+function videoThumb(id) { return "https://i.ytimg.com/vi/" + encodeURIComponent(id) + "/hqdefault.jpg"; }
+
+async function loadVideos(opts) {
+  opts = opts || {};
+  let items = VIDEO_SEED.slice();
+  if (NEWS_API_URL) {
+    try {
+      const j = await newsFetchJson(NEWS_API_URL + "?action=video");
+      if (j.status === "ok" && Array.isArray(j.items)) items = items.concat(j.items);
+    } catch (e) { /* 연결이 안 되면 고정 목록만 */ }
+  }
+  items = items.map(v => Object.assign({}, v, { yt: videoId(v.yt) })).filter(v => v.yt);
+  items.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+  return opts.limit ? items.slice(0, opts.limit) : items;
 }

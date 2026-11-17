@@ -199,6 +199,12 @@ footer b{color:#fff;font-size:16px}
 footer .links{display:flex;gap:16px;flex-wrap:wrap}
 footer .links a{color:#fff}
 footer .ph{background:rgba(242,163,58,.25);color:#fff}
+.vrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.vrow a{display:block;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;transition:transform .15s,box-shadow .15s}
+.vrow a:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(34,48,122,.12)}
+.vrow .th{position:relative;aspect-ratio:16/9;background:#1b1f33 center/cover no-repeat}
+.vrow .th::after{content:"";position:absolute;left:50%;top:50%;width:54px;height:38px;margin:-19px 0 0 -27px;border-radius:11px;background:rgba(220,30,30,.9) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M8 5v14l11-7z'/%3E%3C/svg%3E") center/20px no-repeat}
+.vrow b{display:block;padding:12px 14px 14px;font-size:15.5px;line-height:1.45;color:var(--main-d)}
 </style>
 </head>
 <body>
@@ -314,6 +320,13 @@ footer .ph{background:rgba(242,163,58,.25);color:#fff}
   </div>
 </section>
 
+<section id="video" hidden>
+  <div class="wrap">
+    <div class="sec-title"><div><div class="eyebrow">VIDEO</div><h2>영상 자료</h2><p>복지리더아카데미 등 협의체 교육·행사 영상을 보실 수 있습니다.</p></div><a href="video.html">전체 보기 →</a></div>
+    <div class="vrow" id="video-latest"></div>
+  </div>
+</section>
+
 <section id="bunkwa">
   <div class="wrap">
     <div class="sec-title"><div><div class="eyebrow">COMMITTEES</div><h2>실무분과</h2><p>기관·법인·단체·시설 간 연계와 협력, 지역사회보장계획 모니터링, 특성화 사업을 추진합니다.</p></div><a href="bunkwa.html">분과 상세 보기 →</a></div>
@@ -401,6 +414,11 @@ loadNews({ limit: 4 }).then(items => {
     : `<li><span class="t">아직 올라온 소식이 없어요.</span></li>`;
 });
 noticePopupInit();
+loadVideos({ limit: 3 }).then(items => {
+  if (!items.length) return;
+  document.getElementById("video-latest").innerHTML = items.map(v => `<a href="video.html#${encodeURIComponent(v.id)}"><div class="th" style="background-image:url('${newsEsc(videoThumb(v.yt))}')"></div><b>${newsEsc(v.title)}</b></a>`).join("");
+  document.getElementById("video").hidden = false;
+});
 loadNotices({ limit: 4 }).then(items => {
   const el = document.getElementById("notice-latest");
   el.innerHTML = items.length ? items.map(n => `<li><a class="t" href="notice.html#${encodeURIComponent(n.id)}">${n.pin || noticeIsNew(n) ? `<span class="tag">${n.pin ? "중요" : "NEW"}</span>` : `<span class="cat">${newsEsc(n.head || "공지")}</span>`}${newsEsc(n.title)}</a><time>${newsDate(n.date)}</time></li>`).join("")

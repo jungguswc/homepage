@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>영상 자료 | 대구중구지역사회보장협의체</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+[hidden]{display:none!important}
+:root{
+  --main:#3346A8; --main-d:#22307A; --main-l:#EEF0FA;
+  --sky:#29A8E0; --accent:#F2A33A; --ink:#1C2033; --muted:#5B6075; --line:#DFE2EE;
+  --bg:#ffffff; --soft:#F5F6FB; --ok:#1E7A4C; --ok-l:#E3F4EA; --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;word-break:keep-all;font-size:16px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.draft{background:var(--accent);color:#3a2500;text-align:center;font-size:13px;padding:6px 16px;font-weight:500}
+
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:20}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:17px;color:var(--main-d)}
+.logo .mark{width:42px;height:42px;object-fit:contain;flex-shrink:0}
+.logo small{display:block;font-size:10.5px;font-weight:500;color:var(--muted);letter-spacing:.03em}
+.menu{display:flex;gap:20px;font-weight:500;font-size:15px}
+.menu a:hover,.menu a.on{color:var(--main)}
+.menu a.on{font-weight:700}
+.burger{display:none;background:none;border:0;font-size:26px;cursor:pointer;color:var(--main-d)}
+@media(max-width:1020px){
+  .menu{display:none;position:absolute;top:70px;left:0;right:0;background:#fff;flex-direction:column;gap:0;border-bottom:1px solid var(--line)}
+  .menu.open{display:flex}
+  .menu a{padding:14px 16px;border-top:1px solid var(--line)}
+  .burger{display:block}
+}
+
+.sub-hero{background:linear-gradient(120deg,var(--main-d),var(--main));color:#fff;padding:40px 0 44px}
+.crumb{font-size:13px;opacity:.8;margin-bottom:8px}
+.crumb a:hover{text-decoration:underline}
+.sub-hero h1{font-size:clamp(26px,4vw,34px);font-weight:900}
+.sub-hero p{opacity:.88;margin-top:6px;font-size:15px}
+
+
+
+main.wrap{padding-block:28px 72px}
+.switch{display:flex;gap:6px;background:var(--soft);border-radius:999px;padding:4px;width:max-content;max-width:100%;margin-bottom:18px;flex-wrap:wrap}
+.switch a{padding:7px 18px;border-radius:999px;font-size:14.5px;font-weight:500;color:var(--muted)}
+.switch a.on{background:#fff;color:var(--main-d);font-weight:700;box-shadow:0 1px 4px rgba(34,48,122,.12)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink)}
+.tab[aria-pressed="true"]{background:var(--main);border-color:var(--main);color:#fff}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.vcard{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;cursor:pointer;text-align:left;font:inherit;color:inherit;padding:0;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
+.vcard:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(34,48,122,.12)}
+.vcard:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+.vthumb{position:relative;aspect-ratio:16/9;background:#1b1f33 center/cover no-repeat}
+.vthumb::after{content:"";position:absolute;left:50%;top:50%;width:58px;height:40px;margin:-20px 0 0 -29px;border-radius:12px;background:rgba(220,30,30,.9) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M8 5v14l11-7z'/%3E%3C/svg%3E") center/22px no-repeat}
+.vbody{padding:14px 16px 16px}
+.vmeta{display:flex;gap:8px;align-items:center;font-size:12.5px;color:var(--muted)}
+.vcat{font-weight:700;border-radius:6px;padding:2px 8px;background:var(--main-l);color:var(--main)}
+.vbody h3{font-size:16px;line-height:1.45;margin-top:8px;color:var(--main-d)}
+.vbody p{font-size:14px;color:var(--muted);margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.empty{padding:56px 16px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:16px}
+dialog{border:0;border-radius:18px;padding:0;max-width:880px;width:calc(100% - 32px);max-height:calc(100% - 48px)}
+dialog::backdrop{background:rgba(20,24,45,.7)}
+.dlg{padding:18px 20px 22px}
+.dlg-top{display:flex;justify-content:space-between;align-items:start;gap:12px;margin-bottom:12px}
+.dlg h2{font-size:20px;line-height:1.4;color:var(--main-d);margin-top:4px}
+.x{border:0;background:var(--soft);border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;flex-shrink:0}
+.player{position:relative;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.dlg .desc{margin-top:12px;font-size:15px;white-space:pre-line}
+.dlg .yt{display:inline-block;margin-top:12px;font-size:14px;color:var(--main);font-weight:700}
+
+footer{background:#151A33;color:#B6BBD1;padding:36px 0;font-size:14px}
+footer b{color:#fff}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a href="./" class="logo"><img class="mark" src="logo.png" alt="" width="42" height="42"><span>대구중구지역사회보장협의체<small>DAEGU JUNG-GU SOCIAL SECURITY COUNCIL</small></span></a>
+    <nav class="menu" id="menu">
+      <a href="index.html#about">협의체 소개</a>
+      <a href="bunkwa.html">실무분과</a>
+      <a href="dong.html">동 협의체</a>
+      <a href="jawon.html">복지자원</a>
+      <a href="index.html#biz">주요사업</a>
+      <a href="news.html" class="on">소식·공지</a>
+      <a href="gyehoek.html">자료실</a>
+      <a href="index.html#contact">참여·문의</a>
+    </nav>
+    <button class="burger" aria-label="메뉴 열기" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<div class="sub-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="./">홈</a> › 자료실 › 영상 자료</div>
+    <h1>영상 자료</h1>
+    <p>복지리더아카데미 등 협의체 교육·행사 영상을 모았습니다</p>
+  </div>
+</div>
+
+<main class="wrap">
+  <nav class="switch" aria-label="자료실"><a href="gyehoek.html">지역사회보장계획</a><a href="video.html" class="on" aria-current="page">영상 자료</a></nav>
+  <div class="tabs" role="group" aria-label="분류"></div>
+  <div class="vgrid" id="list" aria-live="polite"><p class="empty">영상을 불러오고 있어요…</p></div>
+</main>
+
+<dialog id="dlg" aria-labelledby="dlg-title">
+  <div class="dlg">
+    <div class="dlg-top"><div><div class="vmeta" id="dlg-meta"></div><h2 id="dlg-title"></h2></div><button class="x" type="button" aria-label="닫기" onclick="document.getElementById('dlg').close()">✕</button></div>
+    <div class="player" id="player"></div>
+    <p class="desc" id="dlg-desc"></p>
+    <a class="yt" id="dlg-yt" target="_blank" rel="noopener">유튜브에서 보기 ↗</a>
+  </div>
+</dialog>
+
+<footer>
+  <div class="wrap"><b>대구중구지역사회보장협의체 사무국</b> · 대구광역시 중구 국채보상로139길 1, 4층 · 전화 053-661-2288 · actor0204@korea.kr · © 2026</div>
+</footer>
+
+<script src="news.js"></script>
+<script>
+let ALL = [], cat = "전체";
+const tabs = document.querySelector(".tabs");
+
+function draw(){
+  const cats = ["전체"].concat([...new Set(ALL.map(v => v.cat).filter(Boolean))]);
+  tabs.innerHTML = cats.length > 2 ? cats.map(c => `<button type="button" class="tab" data-c="${newsEsc(c)}" aria-pressed="${c === cat}">${newsEsc(c)}</button>`).join("") : "";
+  const rows = ALL.filter(v => cat === "전체" || v.cat === cat);
+  const el = document.getElementById("list");
+  if (!rows.length) { el.innerHTML = `<p class="empty">아직 올라온 영상이 없어요.<br>복지리더아카데미 영상이 곧 올라올 예정이에요.</p>`; return; }
+  el.innerHTML = rows.map(v => `
+    <button type="button" class="vcard" data-id="${newsEsc(v.id)}">
+      <div class="vthumb" style="background-image:url('${newsEsc(videoThumb(v.yt))}')" role="img" aria-label="${newsEsc(v.title)} 미리보기"></div>
+      <div class="vbody">
+        <div class="vmeta">${v.cat ? `<span class="vcat">${newsEsc(v.cat)}</span>` : ""}<time>${newsDate(v.date)}</time></div>
+        <h3>${newsEsc(v.title)}</h3>
+        ${v.desc ? `<p>${newsEsc(v.desc)}</p>` : ""}
+      </div>
+    </button>`).join("");
+}
+
+function open_(v){
+  document.getElementById("dlg-meta").innerHTML = (v.cat ? `<span class="vcat">${newsEsc(v.cat)}</span>` : "") + `<time>${newsDate(v.date)}</time>`;
+  document.getElementById("dlg-title").textContent = v.title;
+  document.getElementById("player").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(v.yt)}?rel=0&autoplay=1" title="${newsEsc(v.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  document.getElementById("dlg-desc").textContent = v.desc || "";
+  document.getElementById("dlg-yt").href = "https://www.youtube.com/watch?v=" + encodeURIComponent(v.yt);
+  const d = document.getElementById("dlg");
+  if (!d.open) d.showModal();
+  history.replaceState(null, "", "#" + encodeURIComponent(v.id));
+}
+
+tabs.addEventListener("click", e => { const b = e.target.closest(".tab"); if (b) { cat = b.dataset.c; draw(); } });
+document.getElementById("list").addEventListener("click", e => {
+  const c = e.target.closest(".vcard"); if (!c) return;
+  const v = ALL.find(x => String(x.id) === c.dataset.id); if (v) open_(v);
+});
+const dlg = document.getElementById("dlg");
+dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+dlg.addEventListener("close", () => { document.getElementById("player").innerHTML = ""; history.replaceState(null, "", location.pathname); });
+
+loadVideos().then(items => {
+  ALL = items; draw();
+  const id = decodeURIComponent(location.hash.slice(1));
+  const v = id && ALL.find(x => String(x.id) === id);
+  if (v) open_(v);
+});
+</script>
+</body>
+</html>
