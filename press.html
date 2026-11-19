@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>언론 보도 | 대구중구지역사회보장협의체</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+[hidden]{display:none!important}
+:root{
+  --main:#3346A8; --main-d:#22307A; --main-l:#EEF0FA;
+  --sky:#29A8E0; --accent:#F2A33A; --ink:#1C2033; --muted:#5B6075; --line:#DFE2EE;
+  --bg:#ffffff; --soft:#F5F6FB; --ok:#1E7A4C; --ok-l:#E3F4EA; --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;word-break:keep-all;font-size:16px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.draft{background:var(--accent);color:#3a2500;text-align:center;font-size:13px;padding:6px 16px;font-weight:500}
+
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:20}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:17px;color:var(--main-d)}
+.logo .mark{width:42px;height:42px;object-fit:contain;flex-shrink:0}
+.logo small{display:block;font-size:10.5px;font-weight:500;color:var(--muted);letter-spacing:.03em}
+.menu{display:flex;gap:20px;font-weight:500;font-size:15px}
+.menu a:hover,.menu a.on{color:var(--main)}
+.menu a.on{font-weight:700}
+.burger{display:none;background:none;border:0;font-size:26px;cursor:pointer;color:var(--main-d)}
+@media(max-width:1020px){
+  .menu{display:none;position:absolute;top:70px;left:0;right:0;background:#fff;flex-direction:column;gap:0;border-bottom:1px solid var(--line)}
+  .menu.open{display:flex}
+  .menu a{padding:14px 16px;border-top:1px solid var(--line)}
+  .burger{display:block}
+}
+
+.sub-hero{background:linear-gradient(120deg,var(--main-d),var(--main));color:#fff;padding:40px 0 44px}
+.crumb{font-size:13px;opacity:.8;margin-bottom:8px}
+.crumb a:hover{text-decoration:underline}
+.sub-hero h1{font-size:clamp(26px,4vw,34px);font-weight:900}
+.sub-hero p{opacity:.88;margin-top:6px;font-size:15px}
+
+
+
+main.wrap{padding-block:28px 72px}
+.switch{display:flex;gap:6px;background:var(--soft);border-radius:999px;padding:4px;width:max-content;max-width:100%;margin-bottom:20px;flex-wrap:wrap}
+.switch a{padding:7px 18px;border-radius:999px;font-size:14.5px;font-weight:500;color:var(--muted)}
+.switch a.on{background:#fff;color:var(--main-d);font-weight:700;box-shadow:0 1px 4px rgba(34,48,122,.12)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink)}
+.tab[aria-pressed="true"]{background:var(--main);border-color:var(--main);color:#fff}
+.plist{border-top:2px solid var(--main-d)}
+.pitem{display:block;border-bottom:1px solid var(--line);padding:18px 8px;color:inherit}
+.pitem:hover{background:var(--soft)}
+.pmeta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.pmedia{font-weight:700;border-radius:6px;padding:2px 8px;background:var(--main-l);color:var(--main)}
+.pcat{font-size:12px;border:1px solid var(--line);border-radius:6px;padding:1px 7px}
+.pitem h3{font-size:16.5px;line-height:1.5;margin-top:8px;color:var(--main-d)}
+.pitem p{font-size:14.5px;color:var(--muted);margin-top:4px}
+.pitem .go{display:inline-block;margin-top:8px;font-size:13.5px;font-weight:700;color:var(--main)}
+.empty{padding:48px 0;text-align:center;color:var(--muted)}
+.pnote{margin-top:18px;font-size:13px;color:var(--muted)}
+
+footer{background:#151A33;color:#B6BBD1;padding:36px 0;font-size:14px}
+footer b{color:#fff}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a href="./" class="logo"><img class="mark" src="logo.png" alt="" width="42" height="42"><span>대구중구지역사회보장협의체<small>DAEGU JUNG-GU SOCIAL SECURITY COUNCIL</small></span></a>
+    <nav class="menu" id="menu">
+      <a href="index.html#about">협의체 소개</a>
+      <a href="bunkwa.html">실무분과</a>
+      <a href="dong.html">동 협의체</a>
+      <a href="jawon.html">복지자원</a>
+      <a href="index.html#biz">주요사업</a>
+      <a href="news.html" class="on">소식·공지</a>
+      <a href="gyehoek.html">자료실</a>
+      <a href="index.html#contact">참여·문의</a>
+    </nav>
+    <button class="burger" aria-label="메뉴 열기" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<div class="sub-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="./">홈</a> › <a href="news.html">소식·공지</a> › 언론 보도</div>
+    <h1>언론 보도</h1>
+    <p>언론에 소개된 중구지역사회보장협의체의 활동을 모았습니다</p>
+  </div>
+</div>
+
+<main class="wrap">
+  <nav class="switch" aria-label="소식·공지"><a href="notice.html">공지사항</a><a href="news.html">활동 소식</a><a href="press.html" class="on" aria-current="page">언론 보도</a></nav>
+  <div class="tabs" role="group" aria-label="분류"></div>
+  <div class="plist" id="list" aria-live="polite"><p class="empty">보도 자료를 불러오고 있어요…</p></div>
+  <p class="pnote">※ 기사 제목을 누르면 해당 언론사 원문으로 이동합니다. 기사의 저작권은 각 언론사에 있습니다.</p>
+</main>
+
+<footer>
+  <div class="wrap"><b>대구중구지역사회보장협의체 사무국</b> · 대구광역시 중구 국채보상로139길 1, 4층 · 전화 053-661-2288 · actor0204@korea.kr · <a href="https://www.youtube.com/channel/UC8d0t7k7S2Z6U_x6XuW7EUA" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">유튜브 채널</a> · © 2026</div>
+</footer>
+
+<script src="news.js"></script>
+<script>
+let ALL = [], cat = "전체";
+const tabs = document.querySelector(".tabs");
+function draw(){
+  const cats = ["전체"].concat([...new Set(ALL.map(p => p.cat).filter(Boolean))]);
+  tabs.innerHTML = cats.length > 2 ? cats.map(c => `<button type="button" class="tab" data-c="${newsEsc(c)}" aria-pressed="${c === cat}">${newsEsc(c)}</button>`).join("") : "";
+  const rows = ALL.filter(p => cat === "전체" || p.cat === cat);
+  const el = document.getElementById("list");
+  if (!rows.length) { el.innerHTML = `<p class="empty">아직 등록된 보도가 없어요.</p>`; return; }
+  el.innerHTML = rows.map(p => `
+    <a class="pitem" href="${newsEsc(p.url)}" target="_blank" rel="noopener">
+      <div class="pmeta"><span class="pmedia">${newsEsc(p.media)}</span>${p.cat ? `<span class="pcat">${newsEsc(p.cat)}</span>` : ""}<time>${newsDate(p.date)}</time></div>
+      <h3>${newsEsc(p.title)}</h3>
+      ${p.summary ? `<p>${newsEsc(p.summary)}</p>` : ""}
+      <span class="go">기사 원문 보기 ↗</span>
+    </a>`).join("");
+}
+tabs.addEventListener("click", e => { const b = e.target.closest(".tab"); if (b) { cat = b.dataset.c; draw(); } });
+loadPress().then(items => { ALL = items; draw(); });
+</script>
+</body>
+</html>

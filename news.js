@@ -238,3 +238,32 @@ async function loadVideos(opts) {
   items.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
   return opts.limit ? items.slice(0, opts.limit) : items;
 }
+
+/* ───────────── 언론 보도 ─────────────
+ * 기사 원문으로 연결만 함(본문·기사 사진은 옮기지 않음). 시트 '보도' 탭 + 아래 고정 목록.
+ */
+const PRESS_SEED = [
+  {
+    id: "p-20260624-sisa",
+    date: "2026-06-24",
+    media: "시사저널",
+    cat: "지역사회보장계획",
+    title: "[대구 중구 24시] 대구 중구, 제6기 지역사회보장계획 수립 위한 주민 의견 수렴",
+    summary: "제6기 지역사회보장계획 수립을 위해 12개 동을 3개 권역으로 나눠 동 지역사회보장협의체 위원과 함께 권역별 주민 의견 수렴(FGI)을 진행했다는 소식입니다.",
+    url: "https://naver.me/xhPZOlwz"
+  }
+];
+
+async function loadPress(opts) {
+  opts = opts || {};
+  let items = PRESS_SEED.slice();
+  if (NEWS_API_URL) {
+    try {
+      const j = await newsFetchJson(NEWS_API_URL + "?action=press");
+      if (j.status === "ok" && Array.isArray(j.items)) items = items.concat(j.items);
+    } catch (e) { /* 연결이 안 되면 고정 목록만 */ }
+  }
+  items = items.filter(p => /^https?:\/\//.test(String(p.url || "")));
+  items.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+  return opts.limit ? items.slice(0, opts.limit) : items;
+}
